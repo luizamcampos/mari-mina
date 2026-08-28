@@ -7,17 +7,12 @@
 
   <title>Mariana Mina</title>
 
-  <!-- SATOSHI -->
   <link
-    href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600,700&display=swap"
+    href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600&display=swap"
     rel="stylesheet"
   >
 
   <style>
-
-    /* ================================
-       RESET
-    ================================= */
 
     * {
       margin: 0;
@@ -30,10 +25,11 @@
     }
 
     body {
+      margin: 0;
       font-family: "Satoshi", sans-serif;
-      background: #315545;
       color: #111;
       overflow-x: hidden;
+      background: #315545;
     }
 
     a {
@@ -42,185 +38,259 @@
     }
 
 
-    /* ================================
-       FUNDO ANIMADO
-    ================================= */
+    /* ==========================================
+       FUNDO ANIMADO FIXO
+    ========================================== */
 
-    .animated-background {
+    .liquid-bg {
       position: fixed;
       inset: 0;
       width: 100%;
       height: 100vh;
       overflow: hidden;
       z-index: 0;
-      background: #315545;
+
+      background:
+        radial-gradient(circle at 15% 20%, #ff7478 0%, transparent 38%),
+        radial-gradient(circle at 80% 15%, #ffb269 0%, transparent 42%),
+        radial-gradient(circle at 50% 65%, #ffe580 0%, transparent 40%),
+        radial-gradient(circle at 20% 85%, #f5ec1e 0%, transparent 42%),
+        radial-gradient(circle at 88% 68%, #1f6870 0%, transparent 45%),
+        radial-gradient(circle at 55% 35%, #5aa66f 0%, transparent 42%),
+        radial-gradient(circle at 8% 55%, #d38a57 0%, transparent 40%),
+        #315545;
     }
 
-    .blob {
+    .liquid-layer {
       position: absolute;
-      border-radius: 50%;
-      filter: blur(90px);
-      opacity: 0.9;
-      transform: translate(-50%, -50%);
-      will-change: transform;
+      width: 75vw;
+      height: 75vw;
+
+      border-radius: 44% 56% 63% 37% / 48% 44% 56% 52%;
+
+      filter: blur(80px);
+      opacity: 0.78;
+
+      will-change: transform, border-radius;
+
       mix-blend-mode: screen;
     }
 
-    .blob-1 {
-      width: 65vw;
-      height: 65vw;
-      background: #ff7377;
-      left: 15%;
-      top: 20%;
-      animation: float1 15s ease-in-out infinite alternate;
+    .l1 {
+      background: #ff7478;
+      left: -20vw;
+      top: -20vh;
+
+      animation:
+        move1 20s ease-in-out infinite alternate,
+        morph1 12s ease-in-out infinite alternate;
     }
 
-    .blob-2 {
-      width: 58vw;
-      height: 58vw;
-      background: #ffb66b;
-      left: 75%;
-      top: 15%;
-      animation: float2 19s ease-in-out infinite alternate;
+    .l2 {
+      background: #ffb269;
+      right: -25vw;
+      top: -15vh;
+
+      animation:
+        move2 24s ease-in-out infinite alternate,
+        morph2 14s ease-in-out infinite alternate;
     }
 
-    .blob-3 {
-      width: 52vw;
-      height: 52vw;
+    .l3 {
       background: #ffe580;
-      left: 55%;
-      top: 70%;
-      animation: float3 17s ease-in-out infinite alternate;
+      left: 20vw;
+      top: 40vh;
+
+      animation:
+        move3 22s ease-in-out infinite alternate,
+        morph3 16s ease-in-out infinite alternate;
     }
 
-    .blob-4 {
+    .l4 {
+      background: #f5ec1e;
+      left: -20vw;
+      bottom: -30vh;
+
+      animation:
+        move4 25s ease-in-out infinite alternate,
+        morph2 15s ease-in-out infinite alternate;
+    }
+
+    .l5 {
+      background: #1f6870;
+      right: -25vw;
+      bottom: -25vh;
+
+      animation:
+        move5 21s ease-in-out infinite alternate,
+        morph1 13s ease-in-out infinite alternate;
+    }
+
+    .l6 {
+      background: #5aa66f;
+      left: 38vw;
+      top: 5vh;
+
+      animation:
+        move6 28s ease-in-out infinite alternate,
+        morph3 17s ease-in-out infinite alternate;
+    }
+
+    .l7 {
+      background: #d38a57;
+      left: 5vw;
+      top: 40vh;
+
+      animation:
+        move7 26s ease-in-out infinite alternate,
+        morph2 15s ease-in-out infinite alternate;
+    }
+
+
+    @keyframes move1 {
+      from {
+        transform: translate(0, 0) scale(1);
+      }
+
+      to {
+        transform: translate(32vw, 25vh) scale(1.18) rotate(18deg);
+      }
+    }
+
+    @keyframes move2 {
+      from {
+        transform: translate(0, 0) scale(1.1);
+      }
+
+      to {
+        transform: translate(-35vw, 30vh) scale(0.88) rotate(-22deg);
+      }
+    }
+
+    @keyframes move3 {
+      from {
+        transform: translate(0, 0) scale(1);
+      }
+
+      to {
+        transform: translate(25vw, -35vh) scale(1.3) rotate(30deg);
+      }
+    }
+
+    @keyframes move4 {
+      from {
+        transform: translate(0, 0);
+      }
+
+      to {
+        transform: translate(40vw, -30vh) scale(1.22);
+      }
+    }
+
+    @keyframes move5 {
+      from {
+        transform: translate(0, 0) scale(1.1);
+      }
+
+      to {
+        transform: translate(-40vw, -20vh) scale(0.9);
+      }
+    }
+
+    @keyframes move6 {
+      from {
+        transform: translate(0, 0) scale(1);
+      }
+
+      to {
+        transform: translate(-25vw, 40vh) scale(1.2) rotate(-28deg);
+      }
+    }
+
+    @keyframes move7 {
+      from {
+        transform: translate(0, 0);
+      }
+
+      to {
+        transform: translate(35vw, 5vh) scale(1.25);
+      }
+    }
+
+
+    @keyframes morph1 {
+      from {
+        border-radius:
+          44% 56% 63% 37% /
+          48% 44% 56% 52%;
+      }
+
+      to {
+        border-radius:
+          63% 37% 42% 58% /
+          35% 61% 39% 65%;
+      }
+    }
+
+    @keyframes morph2 {
+      from {
+        border-radius:
+          58% 42% 34% 66% /
+          45% 61% 39% 55%;
+      }
+
+      to {
+        border-radius:
+          37% 63% 61% 39% /
+          62% 38% 58% 42%;
+      }
+    }
+
+    @keyframes morph3 {
+      from {
+        border-radius:
+          51% 49% 68% 32% /
+          35% 65% 41% 59%;
+      }
+
+      to {
+        border-radius:
+          67% 33% 48% 52% /
+          61% 39% 66% 34%;
+      }
+    }
+
+
+    /* ==========================================
+       INTERAÇÃO COM O MOUSE
+    ========================================== */
+
+    .cursor-light {
+      position: fixed;
+
       width: 50vw;
       height: 50vw;
-      background: #f6ef19;
-      left: 20%;
-      top: 80%;
-      animation: float4 20s ease-in-out infinite alternate;
-    }
 
-    .blob-5 {
-      width: 60vw;
-      height: 60vw;
-      background: #1e6870;
-      left: 90%;
-      top: 65%;
-      animation: float5 16s ease-in-out infinite alternate;
-    }
-
-    .blob-6 {
-      width: 48vw;
-      height: 48vw;
-      background: #5da972;
-      left: 45%;
-      top: 35%;
-      animation: float6 21s ease-in-out infinite alternate;
-    }
-
-    .blob-7 {
-      width: 42vw;
-      height: 42vw;
-      background: #d58c56;
-      left: 0%;
-      top: 55%;
-      animation: float7 18s ease-in-out infinite alternate;
-    }
-
-    @keyframes float1 {
-      from {
-        transform: translate(-50%, -50%) translate(-5vw, -3vh) scale(1);
-      }
-      to {
-        transform: translate(-50%, -50%) translate(15vw, 15vh) scale(1.15);
-      }
-    }
-
-    @keyframes float2 {
-      from {
-        transform: translate(-50%, -50%) translate(5vw, 0) scale(1.1);
-      }
-      to {
-        transform: translate(-50%, -50%) translate(-18vw, 18vh) scale(0.9);
-      }
-    }
-
-    @keyframes float3 {
-      from {
-        transform: translate(-50%, -50%) translate(0, 8vh);
-      }
-      to {
-        transform: translate(-50%, -50%) translate(15vw, -20vh) scale(1.2);
-      }
-    }
-
-    @keyframes float4 {
-      from {
-        transform: translate(-50%, -50%) translate(-10vw, 0);
-      }
-      to {
-        transform: translate(-50%, -50%) translate(18vw, -20vh) scale(1.15);
-      }
-    }
-
-    @keyframes float5 {
-      from {
-        transform: translate(-50%, -50%) scale(1.2);
-      }
-      to {
-        transform: translate(-50%, -50%) translate(-25vw, -10vh) scale(0.9);
-      }
-    }
-
-    @keyframes float6 {
-      from {
-        transform: translate(-50%, -50%) translate(5vw, 8vh);
-      }
-      to {
-        transform: translate(-50%, -50%) translate(-15vw, 12vh) scale(1.25);
-      }
-    }
-
-    @keyframes float7 {
-      from {
-        transform: translate(-50%, -50%) scale(1);
-      }
-      to {
-        transform: translate(-50%, -50%) translate(25vw, 5vh) scale(1.3);
-      }
-    }
-
-
-    /* ================================
-       BRILHO QUE SEGUE O MOUSE
-    ================================= */
-
-    .mouse-glow {
-      position: fixed;
-      width: 55vw;
-      height: 55vw;
+      border-radius: 50%;
 
       left: 50%;
       top: 50%;
 
       transform: translate(-50%, -50%);
 
-      border-radius: 50%;
-
       background:
         radial-gradient(
           circle,
-          rgba(255,255,255,0.22) 0%,
-          rgba(255,229,128,0.13) 25%,
-          rgba(255,115,119,0.08) 45%,
+          rgba(255,255,255,0.20),
+          rgba(255,229,128,0.12) 25%,
+          rgba(255,116,120,0.08) 45%,
           transparent 70%
         );
 
-      filter: blur(35px);
+      filter: blur(45px);
 
       pointer-events: none;
+
       z-index: 1;
 
       transition:
@@ -229,57 +299,50 @@
     }
 
 
-    /* ================================
-       PRIMEIRA TELA
-    ================================= */
+    /* ==========================================
+       HERO
+    ========================================== */
 
     .hero {
       position: relative;
-      z-index: 2;
 
       height: 100vh;
       width: 100%;
 
-      color: #111;
+      z-index: 2;
+
+      pointer-events: none;
     }
 
-    .hero a,
-    .hero .name {
-      position: absolute;
-      z-index: 4;
+    .hero a {
+      pointer-events: auto;
     }
 
     .name {
-      left: 4vw;
+      position: absolute;
+
       top: 4vh;
+      left: 4vw;
 
-      font-size: clamp(2.6rem, 6vw, 7rem);
-      font-weight: 500;
-      letter-spacing: -0.06em;
+      font-size: clamp(1.7rem, 2.8vw, 3.2rem);
 
-      line-height: 0.9;
-    }
+      font-weight: 400;
 
-    .about-link {
-      right: 5vw;
-      top: 7vh;
-    }
+      line-height: 0.92;
 
-    .projects-link {
-      left: 5vw;
-      bottom: 7vh;
-    }
-
-    .contact-link {
-      right: 5vw;
-      bottom: 7vh;
+      letter-spacing: -0.045em;
     }
 
     .menu-link {
-      font-size: clamp(0.9rem, 1.15vw, 1.25rem);
+      position: absolute;
+
+      font-size: clamp(0.7rem, 0.8vw, 0.9rem);
+
       font-weight: 400;
 
-      letter-spacing: 0.01em;
+      letter-spacing: 0.02em;
+
+      text-transform: uppercase;
 
       transition:
         opacity 0.3s ease,
@@ -287,61 +350,98 @@
     }
 
     .menu-link:hover {
-      opacity: 0.55;
-      transform: translateY(-3px);
+      opacity: 0.5;
+      transform: translateY(-2px);
+    }
+
+    .about-link {
+      top: 6vh;
+      right: 5vw;
+    }
+
+    .projects-link {
+      left: 4vw;
+      bottom: 6vh;
+    }
+
+    .contact-link {
+      right: 5vw;
+      bottom: 6vh;
     }
 
     .scroll-hint {
       position: absolute;
 
       left: 50%;
-      bottom: 6vh;
+      bottom: 4vh;
 
       transform: translateX(-50%);
 
-      font-size: 12px;
-      letter-spacing: 0.09em;
+      font-size: 0.65rem;
+
+      letter-spacing: 0.12em;
 
       text-transform: uppercase;
-      opacity: 0.65;
 
-      writing-mode: vertical-rl;
+      opacity: 0.55;
     }
 
 
-    /* ================================
-       PAPEL VEGETAL
-    ================================= */
+    /* ==========================================
+       VEGETAL SUBINDO POR CIMA
+    ========================================== */
 
-    .content {
+    .vegetal-wrapper {
       position: relative;
-      z-index: 5;
+
+      z-index: 10;
+
+      margin-top: 0;
+
+      transform: translateY(0);
+
+      background:
+        rgba(244, 241, 221, 0.42);
+
+      backdrop-filter: blur(26px) saturate(0.85);
+      -webkit-backdrop-filter: blur(26px) saturate(0.85);
+
+      border-top:
+        1px solid rgba(255,255,255,0.35);
+
+      box-shadow:
+        0 -20px 60px rgba(255,255,255,0.06);
 
       min-height: 250vh;
 
-      background: rgba(246, 244, 226, 0.54);
-
-      backdrop-filter: blur(34px);
-      -webkit-backdrop-filter: blur(34px);
-
-      border-top-left-radius: 35px;
-      border-top-right-radius: 35px;
-
-      box-shadow:
-        0 -1px 0 rgba(255,255,255,0.35);
-
-      padding: 10vh 5vw 15vh;
-
-      color: #111;
+      color: #121212;
     }
 
 
-    /* ================================
-       SOBRE
-    ================================= */
+    /* O vegetal começa literalmente
+       logo depois do hero, como uma placa
+       que sobe por cima do fundo */
 
-    .section-label {
-      font-size: 13px;
+    .vegetal-inner {
+      padding:
+        10vh 5vw 15vh;
+    }
+
+
+    /* ==========================================
+       SOBRE
+    ========================================== */
+
+    .about {
+      min-height: 100vh;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .label {
+      font-size: 0.7rem;
 
       text-transform: uppercase;
 
@@ -350,54 +450,48 @@
       margin-bottom: 3rem;
     }
 
-    .about {
-      min-height: 90vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
     .about-text {
-      font-size: clamp(2.2rem, 5.6vw, 6.7rem);
+      font-size: clamp(2rem, 5vw, 6rem);
 
       line-height: 0.98;
 
+      letter-spacing: -0.05em;
+
       font-weight: 400;
 
-      letter-spacing: -0.045em;
-
-      max-width: 1250px;
+      max-width: 1200px;
     }
 
-    .small-info {
+    .about-bottom {
       display: flex;
       justify-content: space-between;
-      gap: 40px;
 
-      margin-top: 8vh;
+      gap: 4rem;
 
-      font-size: clamp(0.95rem, 1.2vw, 1.3rem);
+      margin-top: 10vh;
+
+      font-size: clamp(0.9rem, 1.1vw, 1.1rem);
 
       line-height: 1.5;
     }
 
-    .small-info p {
-      max-width: 420px;
+    .about-bottom p {
+      max-width: 390px;
     }
 
 
-    /* ================================
+    /* ==========================================
        PROJETOS
-    ================================= */
+    ========================================== */
 
     .projects {
       padding-top: 15vh;
     }
 
     .projects-title {
-      font-size: clamp(3rem, 8vw, 9rem);
+      font-size: clamp(2.5rem, 7vw, 8rem);
 
-      font-weight: 500;
+      font-weight: 400;
 
       letter-spacing: -0.06em;
 
@@ -410,8 +504,6 @@
       grid-template-columns: repeat(12, 1fr);
 
       gap: 2vw;
-
-      align-items: start;
     }
 
     .project {
@@ -419,24 +511,9 @@
 
       overflow: hidden;
 
-      background: rgba(255,255,255,0.12);
-
       min-height: 400px;
 
       cursor: pointer;
-    }
-
-    .project img {
-      width: 100%;
-      height: 100%;
-
-      object-fit: cover;
-
-      display: block;
-
-      transition:
-        transform 0.7s cubic-bezier(.2,.8,.2,1),
-        filter 0.5s ease;
     }
 
     .project-overlay {
@@ -444,13 +521,14 @@
 
       inset: 0;
 
+      padding: 24px;
+
       display: flex;
       flex-direction: column;
       justify-content: space-between;
 
-      padding: 25px;
-
-      background: rgba(242, 239, 216, 0);
+      background:
+        rgba(244,241,221,0);
 
       backdrop-filter: blur(0px);
       -webkit-backdrop-filter: blur(0px);
@@ -466,74 +544,67 @@
     .project:hover .project-overlay {
       opacity: 1;
 
-      background: rgba(242, 239, 216, 0.65);
+      background:
+        rgba(244,241,221,0.60);
 
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-    }
-
-    .project:hover img {
-      transform: scale(1.025);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
     }
 
     .project-name {
-      font-size: clamp(1.8rem, 3vw, 4rem);
-
-      line-height: 0.95;
+      font-size: clamp(1.6rem, 2.6vw, 3rem);
 
       letter-spacing: -0.04em;
+
+      line-height: 0.96;
     }
 
     .project-meta {
       display: flex;
       justify-content: space-between;
 
-      font-size: 0.9rem;
+      font-size: 0.72rem;
 
       text-transform: uppercase;
 
       letter-spacing: 0.05em;
     }
 
-    .project:nth-child(1) {
+    .p1 {
       grid-column: 1 / 8;
-      height: 70vh;
+
+      height: 68vh;
+
+      background: #ff7478;
     }
 
-    .project:nth-child(2) {
+    .p2 {
       grid-column: 9 / 13;
-      height: 52vh;
-      margin-top: 15vh;
+
+      height: 50vh;
+
+      margin-top: 12vh;
+
+      background: #1f6870;
     }
 
-    .project:nth-child(3) {
+    .p3 {
       grid-column: 3 / 11;
-      height: 75vh;
+
+      height: 72vh;
+
       margin-top: 10vh;
+
+      background: #d38a57;
     }
 
 
-    /* placeholders enquanto não temos imagens */
-
-    .placeholder-1 {
-      background: #ff7377;
-    }
-
-    .placeholder-2 {
-      background: #1e6870;
-    }
-
-    .placeholder-3 {
-      background: #d58c56;
-    }
-
-
-    /* ================================
+    /* ==========================================
        CONTATO
-    ================================= */
+    ========================================== */
 
     .contact {
-      min-height: 90vh;
+      min-height: 100vh;
 
       display: flex;
       flex-direction: column;
@@ -543,76 +614,73 @@
     }
 
     .contact-title {
-      font-size: clamp(4rem, 10vw, 12rem);
+      font-size: clamp(3.5rem, 9vw, 11rem);
 
-      font-weight: 500;
+      font-weight: 400;
 
-      letter-spacing: -0.075em;
+      letter-spacing: -0.07em;
 
-      line-height: 0.8;
+      line-height: 0.82;
     }
 
     .contact-bottom {
-      margin-top: 8vh;
-
       display: flex;
+
       justify-content: space-between;
 
-      border-top: 1px solid rgba(0,0,0,0.25);
+      gap: 20px;
 
-      padding-top: 20px;
+      padding-top: 18px;
+
+      margin-top: 8vh;
+
+      border-top:
+        1px solid rgba(0,0,0,0.25);
+
+      font-size: 0.8rem;
     }
 
 
-    /* ================================
-       ANIMAÇÃO DE ENTRADA NO SCROLL
-    ================================= */
+    /* ==========================================
+       REVEAL
+    ========================================== */
 
     .reveal {
       opacity: 0;
 
-      transform: translateY(70px);
+      transform: translateY(50px);
 
       transition:
-        opacity 1s cubic-bezier(.2,.8,.2,1),
-        transform 1s cubic-bezier(.2,.8,.2,1);
+        opacity 0.9s cubic-bezier(.2,.8,.2,1),
+        transform 0.9s cubic-bezier(.2,.8,.2,1);
     }
 
     .reveal.visible {
       opacity: 1;
-
       transform: translateY(0);
     }
 
 
-    /* ================================
+    /* ==========================================
        MOBILE
-    ================================= */
+    ========================================== */
 
     @media (max-width: 700px) {
 
       .name {
-        font-size: 13vw;
-        left: 5vw;
-        top: 4vh;
+        font-size: 8vw;
       }
 
-      .about-link {
-        right: 5vw;
-        top: 24vh;
+      .menu-link {
+        font-size: 0.65rem;
       }
 
-      .projects-link {
-        left: 5vw;
-        bottom: 8vh;
+      .vegetal-inner {
+        padding:
+          8vh 5vw 12vh;
       }
 
-      .contact-link {
-        right: 5vw;
-        bottom: 8vh;
-      }
-
-      .small-info {
+      .about-bottom {
         flex-direction: column;
       }
 
@@ -621,26 +689,22 @@
       }
 
       .project,
-      .project:nth-child(1),
-      .project:nth-child(2),
-      .project:nth-child(3) {
+      .p1,
+      .p2,
+      .p3 {
         width: 100%;
-
-        height: 65vh;
-
+        height: 62vh;
         margin: 0 0 25px 0;
-      }
-
-      .content {
-        border-radius: 22px 22px 0 0;
       }
 
       .contact-bottom {
         flex-direction: column;
-        gap: 15px;
       }
 
-      .blob {
+      .liquid-layer {
+        width: 110vw;
+        height: 110vw;
+
         filter: blur(60px);
       }
 
@@ -653,44 +717,50 @@
 <body>
 
 
-  <!-- =========================
-       FUNDO
-  ========================== -->
+  <!-- FUNDO FIXO -->
 
-  <div class="animated-background">
+  <div class="liquid-bg">
 
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
-    <div class="blob blob-4"></div>
-    <div class="blob blob-5"></div>
-    <div class="blob blob-6"></div>
-    <div class="blob blob-7"></div>
+    <div class="liquid-layer l1"></div>
+    <div class="liquid-layer l2"></div>
+    <div class="liquid-layer l3"></div>
+    <div class="liquid-layer l4"></div>
+    <div class="liquid-layer l5"></div>
+    <div class="liquid-layer l6"></div>
+    <div class="liquid-layer l7"></div>
 
   </div>
 
-  <div class="mouse-glow"></div>
+  <div class="cursor-light"></div>
 
 
-  <!-- =========================
-       HOME
-  ========================== -->
+  <!-- HERO -->
 
   <section class="hero">
 
     <div class="name">
-      MARIANA<br>MINA
+      MARIANA<br>
+      MINA
     </div>
 
-    <a class="menu-link about-link" href="#sobre">
+    <a
+      class="menu-link about-link"
+      href="#sobre"
+    >
       SOBRE
     </a>
 
-    <a class="menu-link projects-link" href="#projetos">
+    <a
+      class="menu-link projects-link"
+      href="#projetos"
+    >
       PROJETOS
     </a>
 
-    <a class="menu-link contact-link" href="#contato">
+    <a
+      class="menu-link contact-link"
+      href="#contato"
+    >
       CONTATO
     </a>
 
@@ -701,163 +771,149 @@
   </section>
 
 
-  <!-- =========================
-       PAPEL VEGETAL
-  ========================== -->
+  <!-- PAPEL VEGETAL -->
 
-  <main class="content">
+  <main class="vegetal-wrapper">
+
+    <div class="vegetal-inner">
 
 
-    <!-- SOBRE -->
+      <!-- SOBRE -->
 
-    <section class="about" id="sobre">
+      <section class="about" id="sobre">
 
-      <div>
+        <div>
 
-        <div class="section-label reveal">
-          Sobre
+          <div class="label reveal">
+            Sobre
+          </div>
+
+          <div class="about-text reveal">
+            Mariana Mina é designer e cria experiências visuais entre identidade, imagem e direção criativa.
+          </div>
+
         </div>
 
-        <div class="about-text reveal">
-          Mariana Mina é designer e cria experiências visuais entre identidade, imagem e direção criativa.
+        <div class="about-bottom reveal">
+
+          <p>
+            Trabalhos construídos a partir de conceito,
+            pesquisa, experimentação e linguagem visual.
+          </p>
+
+          <p>
+            São Paulo, Brasil<br>
+            Disponível para projetos e colaborações.
+          </p>
+
         </div>
 
-      </div>
-
-      <div class="small-info reveal">
-
-        <p>
-          Trabalhos construídos a partir de conceito,
-          pesquisa, experimentação e linguagem visual.
-        </p>
-
-        <p>
-          São Paulo, Brasil<br>
-          Disponível para projetos e colaborações.
-        </p>
-
-      </div>
-
-    </section>
+      </section>
 
 
+      <!-- PROJETOS -->
 
-    <!-- PROJETOS -->
+      <section class="projects" id="projetos">
 
-    <section class="projects" id="projetos">
+        <div class="label reveal">
+          Projetos selecionados
+        </div>
 
-      <div class="section-label reveal">
-        Projetos selecionados
-      </div>
+        <h2 class="projects-title reveal">
+          Projetos
+        </h2>
 
-      <h2 class="projects-title reveal">
-        Projetos
-      </h2>
-
-      <div class="project-grid">
+        <div class="project-grid">
 
 
-        <article class="project placeholder-1 reveal">
+          <article class="project p1 reveal">
 
-          <div class="project-overlay">
+            <div class="project-overlay">
 
-            <div class="project-name">
-              Projeto Um
-            </div>
+              <div class="project-name">
+                Projeto Um
+              </div>
 
-            <div class="project-meta">
-
-              <span>Identidade Visual</span>
-
-              <span>2026</span>
+              <div class="project-meta">
+                <span>Identidade Visual</span>
+                <span>2026</span>
+              </div>
 
             </div>
 
-          </div>
-
-        </article>
+          </article>
 
 
+          <article class="project p2 reveal">
 
-        <article class="project placeholder-2 reveal">
+            <div class="project-overlay">
 
-          <div class="project-overlay">
+              <div class="project-name">
+                Projeto Dois
+              </div>
 
-            <div class="project-name">
-              Projeto Dois
-            </div>
-
-            <div class="project-meta">
-
-              <span>Direção Criativa</span>
-
-              <span>2026</span>
+              <div class="project-meta">
+                <span>Direção Criativa</span>
+                <span>2026</span>
+              </div>
 
             </div>
 
-          </div>
-
-        </article>
+          </article>
 
 
+          <article class="project p3 reveal">
 
-        <article class="project placeholder-3 reveal">
+            <div class="project-overlay">
 
-          <div class="project-overlay">
+              <div class="project-name">
+                Projeto Três
+              </div>
 
-            <div class="project-name">
-              Projeto Três
-            </div>
-
-            <div class="project-meta">
-
-              <span>Branding</span>
-
-              <span>2025</span>
+              <div class="project-meta">
+                <span>Branding</span>
+                <span>2025</span>
+              </div>
 
             </div>
 
-          </div>
-
-        </article>
+          </article>
 
 
-      </div>
+        </div>
 
-    </section>
+      </section>
 
 
+      <!-- CONTATO -->
 
-    <!-- CONTATO -->
+      <section class="contact" id="contato">
 
-    <section class="contact" id="contato">
+        <div class="label reveal">
+          Contato
+        </div>
 
-      <div class="section-label reveal">
-        Contato
-      </div>
+        <div class="contact-title reveal">
+          Vamos<br>
+          conversar?
+        </div>
 
-      <div class="contact-title reveal">
-        Vamos<br>conversar?
-      </div>
+        <div class="contact-bottom reveal">
 
-      <div class="contact-bottom reveal">
+          <span>Instagram</span>
 
-        <span>
-          Instagram
-        </span>
+          <span>E-mail</span>
 
-        <span>
-          E-mail
-        </span>
+          <span>
+            © 2026 Mariana Mina
+          </span>
 
-        <span>
-          © 2026 Mariana Mina
-        </span>
+        </div>
 
-      </div>
+      </section>
 
-    </section>
 
+    </div>
 
   </main>
 
@@ -865,101 +921,113 @@
   <script>
 
 
-    /* =================================
-       MOUSE INTERATIVO
-    ================================= */
+    /* ==================================
+       CURSOR
+    ================================== */
 
-    const glow = document.querySelector(".mouse-glow");
+    const cursor =
+      document.querySelector(".cursor-light");
 
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
+    window.addEventListener(
+      "mousemove",
+      (e) => {
 
+        cursor.style.left =
+          e.clientX + "px";
 
-    window.addEventListener("mousemove", (event) => {
+        cursor.style.top =
+          e.clientY + "px";
 
-      mouseX = event.clientX;
-      mouseY = event.clientY;
-
-      glow.style.left = mouseX + "px";
-      glow.style.top = mouseY + "px";
-
-    });
-
-
-    /* =================================
-       MOVIMENTO SUAVE DOS BLOBS
-       BASEADO NO MOUSE
-    ================================= */
-
-    const blobs = document.querySelectorAll(".blob");
-
-    document.addEventListener("mousemove", (event) => {
-
-      const x =
-        (event.clientX / window.innerWidth - 0.5);
-
-      const y =
-        (event.clientY / window.innerHeight - 0.5);
+      }
+    );
 
 
-      blobs.forEach((blob, index) => {
+    /* ==================================
+       FUNDO REAGE AO MOUSE
+    ================================== */
 
-        const strength =
-          (index + 1) * 2;
+    const layers =
+      document.querySelectorAll(
+        ".liquid-layer"
+      );
 
-        blob.style.marginLeft =
-          x * strength + "px";
+    window.addEventListener(
+      "mousemove",
+      (e) => {
 
-        blob.style.marginTop =
-          y * strength + "px";
+        const x =
+          (e.clientX / window.innerWidth - 0.5);
 
-      });
-
-    });
-
+        const y =
+          (e.clientY / window.innerHeight - 0.5);
 
 
-    /* =================================
-       CONTEÚDO APARECENDO NO SCROLL
-    ================================= */
+        layers.forEach(
+          (layer, i) => {
 
-    const revealElements =
+            const force =
+              (i + 1) * 5;
+
+            layer.style.marginLeft =
+              x * force + "px";
+
+            layer.style.marginTop =
+              y * force + "px";
+
+          }
+        );
+
+      }
+    );
+
+
+    /* ==================================
+       REVEAL
+    ================================== */
+
+    const reveals =
       document.querySelectorAll(".reveal");
-
 
     const observer =
       new IntersectionObserver(
 
         (entries) => {
 
-          entries.forEach((entry) => {
+          entries.forEach(
+            (entry) => {
 
-            if (entry.isIntersecting) {
+              if (
+                entry.isIntersecting
+              ) {
 
-              entry.target.classList.add("visible");
+                entry.target.classList.add(
+                  "visible"
+                );
+
+              }
 
             }
-
-          });
+          );
 
         },
 
         {
-          threshold: 0.15
+          threshold: 0.12
         }
 
       );
 
 
-    revealElements.forEach((element) => {
-
-      observer.observe(element);
-
-    });
+    reveals.forEach(
+      (item) => {
+        observer.observe(item);
+      }
+    );
 
 
   </script>
 
 
 </body>
+
 </html>
