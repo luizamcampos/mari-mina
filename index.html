@@ -2,722 +2,847 @@
 <html lang="pt-BR">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>Mariana Mina</title>
 
+  <!-- SATOSHI -->
   <link
     href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600&display=swap"
     rel="stylesheet"
-  />
+  >
 
   <style>
+
+    /* ========================================
+       RESET
+    ======================================== */
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    html {
-      scroll-behavior: smooth;
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
     }
 
     body {
       font-family: "Satoshi", sans-serif;
       color: #111;
       overflow-x: hidden;
-      background: #355746;
+      background: #111;
     }
 
     a {
-      text-decoration: none;
       color: inherit;
+      text-decoration: none;
     }
 
-    /* =========================
-       FUNDO FIXO
-    ========================= */
+
+    /* ========================================
+       GIF FIXO NO FUNDO
+    ======================================== */
 
     .background {
       position: fixed;
       inset: 0;
-      width: 100%;
+
+      width: 100vw;
       height: 100vh;
+
       overflow: hidden;
+
       z-index: 0;
 
-      background: #365847;
+      background: #111;
     }
 
-    .blob {
+
+    .background-gif {
       position: absolute;
 
-      width: 62vw;
-      height: 62vw;
-
-      border-radius: 50%;
-
-      filter: blur(75px);
-
-      opacity: 0.85;
-
-      mix-blend-mode: screen;
-
-      will-change: transform, border-radius;
-    }
-
-    .blob1 {
-      background: #ff7377;
-      left: -15vw;
-      top: -18vh;
-
-      animation:
-        move1 18s ease-in-out infinite alternate,
-        morph1 12s ease-in-out infinite alternate;
-    }
-
-    .blob2 {
-      background: #ffb267;
-      right: -18vw;
-      top: -10vh;
-
-      animation:
-        move2 22s ease-in-out infinite alternate,
-        morph2 15s ease-in-out infinite alternate;
-    }
-
-    .blob3 {
-      background: #ffe17a;
-      left: 25vw;
-      top: 25vh;
-
-      animation:
-        move3 21s ease-in-out infinite alternate,
-        morph3 16s ease-in-out infinite alternate;
-    }
-
-    .blob4 {
-      background: #f5ec1b;
-      left: -10vw;
-      bottom: -25vh;
-
-      animation:
-        move4 24s ease-in-out infinite alternate,
-        morph2 14s ease-in-out infinite alternate;
-    }
-
-    .blob5 {
-      background: #1e6870;
-      right: -20vw;
-      bottom: -20vh;
-
-      animation:
-        move5 20s ease-in-out infinite alternate,
-        morph1 13s ease-in-out infinite alternate;
-    }
-
-    .blob6 {
-      background: #5da871;
-      left: 40vw;
-      top: -5vh;
-
-      animation:
-        move6 26s ease-in-out infinite alternate,
-        morph3 17s ease-in-out infinite alternate;
-    }
-
-    .blob7 {
-      background: #d38b56;
-      left: 8vw;
-      top: 38vh;
-
-      animation:
-        move7 23s ease-in-out infinite alternate,
-        morph2 15s ease-in-out infinite alternate;
-    }
-
-    @keyframes move1 {
-      from {
-        transform: translate(0, 0) scale(1);
-      }
-
-      to {
-        transform: translate(35vw, 30vh) scale(1.15) rotate(20deg);
-      }
-    }
-
-    @keyframes move2 {
-      from {
-        transform: translate(0, 0) scale(1);
-      }
-
-      to {
-        transform: translate(-35vw, 25vh) scale(0.9) rotate(-20deg);
-      }
-    }
-
-    @keyframes move3 {
-      from {
-        transform: translate(0, 0) scale(1);
-      }
-
-      to {
-        transform: translate(20vw, -30vh) scale(1.25) rotate(30deg);
-      }
-    }
-
-    @keyframes move4 {
-      from {
-        transform: translate(0, 0) scale(1);
-      }
-
-      to {
-        transform: translate(35vw, -25vh) scale(1.2);
-      }
-    }
-
-    @keyframes move5 {
-      from {
-        transform: translate(0, 0) scale(1.1);
-      }
-
-      to {
-        transform: translate(-38vw, -15vh) scale(0.9);
-      }
-    }
-
-    @keyframes move6 {
-      from {
-        transform: translate(0, 0);
-      }
-
-      to {
-        transform: translate(-22vw, 38vh) scale(1.2) rotate(-25deg);
-      }
-    }
-
-    @keyframes move7 {
-      from {
-        transform: translate(0, 0);
-      }
-
-      to {
-        transform: translate(30vw, 5vh) scale(1.2);
-      }
-    }
-
-    @keyframes morph1 {
-      from {
-        border-radius: 45% 55% 62% 38% / 47% 45% 55% 53%;
-      }
-
-      to {
-        border-radius: 62% 38% 43% 57% / 36% 60% 40% 64%;
-      }
-    }
-
-    @keyframes morph2 {
-      from {
-        border-radius: 58% 42% 35% 65% / 44% 61% 39% 56%;
-      }
-
-      to {
-        border-radius: 37% 63% 61% 39% / 62% 38% 58% 42%;
-      }
-    }
-
-    @keyframes morph3 {
-      from {
-        border-radius: 52% 48% 68% 32% / 35% 65% 42% 58%;
-      }
-
-      to {
-        border-radius: 67% 33% 48% 52% / 61% 39% 66% 34%;
-      }
-    }
-
-    /* =========================
-       INTERAÇÃO DO MOUSE
-    ========================= */
-
-    .cursor-glow {
-      position: fixed;
-
-      width: 42vw;
-      height: 42vw;
-
-      border-radius: 50%;
-
-      left: 50%;
       top: 50%;
+      left: 50%;
 
-      transform: translate(-50%, -50%);
+      /*
+        O GIF é vertical.
 
-      background: radial-gradient(
-        circle,
-        rgba(255, 255, 255, 0.16) 0%,
-        rgba(255, 229, 128, 0.08) 30%,
-        rgba(255, 115, 119, 0.05) 48%,
-        transparent 70%
-      );
+        Como vamos girar 90 graus,
+        width vira a altura da tela
+        e height vira a largura.
+      */
 
-      filter: blur(40px);
+      width: 100vh;
+      height: 100vw;
+
+      min-width: 100vh;
+      min-height: 100vw;
+
+      object-fit: cover;
+
+      transform:
+        translate(-50%, -50%)
+        rotate(90deg);
+
+      transform-origin: center center;
 
       pointer-events: none;
 
-      z-index: 1;
-
-      transition:
-        left 0.7s cubic-bezier(.2,.8,.2,1),
-        top 0.7s cubic-bezier(.2,.8,.2,1);
+      user-select: none;
     }
 
-    /* =========================
-       PRIMEIRA TELA
-    ========================= */
 
-    .hero {
-      position: relative;
-      z-index: 2;
+    /* ========================================
+       NAVEGAÇÃO FIXA
+    ======================================== */
 
-      height: 100vh;
-      width: 100%;
-    }
+    .top-nav {
+      position: fixed;
 
-    .hero-nav {
-      position: absolute;
+      top: 24px;
+      left: 32px;
+      right: 32px;
 
-      top: 4vh;
-      left: 4vw;
-      right: 4vw;
+      z-index: 100;
 
       display: flex;
       justify-content: space-between;
-      align-items: center;
 
-      font-size: clamp(0.68rem, 0.75vw, 0.82rem);
+      font-size: 11px;
 
-      letter-spacing: 0.04em;
+      line-height: 1;
+
+      font-weight: 400;
+
+      letter-spacing: 0.035em;
 
       text-transform: uppercase;
+
+      mix-blend-mode: multiply;
     }
 
-    .hero-nav a {
-      transition: opacity 0.3s ease;
+
+    .top-nav a {
+      transition: opacity 0.25s ease;
     }
 
-    .hero-nav a:hover {
-      opacity: 0.5;
+
+    .top-nav a:hover {
+      opacity: 0.45;
     }
 
-    /* =========================
-       PAPEL VEGETAL
-    ========================= */
 
-    .paper {
+    /* ========================================
+       ÁREA DE SCROLL INVISÍVEL
+
+       O usuário rola a página normalmente,
+       mas visualmente os elementos principais
+       ficam fixos.
+
+       O JS usa esse scroll para levantar
+       o papel de baixo para cima.
+    ======================================== */
+
+    #scroll-space {
       position: relative;
-
-      z-index: 10;
 
       width: 100%;
 
-      min-height: 220vh;
+      /*
+        O valor real será recalculado no JS
+        conforme o tamanho do conteúdo.
+      */
 
-      background: rgba(242, 240, 224, 0.38);
+      height: 400vh;
 
-      backdrop-filter: blur(18px) saturate(0.95);
-      -webkit-backdrop-filter: blur(18px) saturate(0.95);
+      z-index: 1;
 
-      border-top: 1px solid rgba(255,255,255,0.28);
-
-      color: #111;
+      pointer-events: none;
     }
 
-    .paper-inner {
-      padding: 8vh 4vw 12vh;
+
+    /* ========================================
+       PAPEL VEGETAL FIXO
+
+       Ele não pertence ao fluxo visual da página.
+       Fica fixo e é deslocado pelo JavaScript.
+    ======================================== */
+
+    .paper {
+      position: fixed;
+
+      top: 0;
+      left: 0;
+
+      width: 100vw;
+      height: 100vh;
+
+      z-index: 20;
+
+      /*
+        MUITO MAIS TRANSPARENTE
+      */
+
+      background:
+        rgba(246, 243, 226, 0.18);
+
+      backdrop-filter:
+        blur(9px)
+        saturate(0.9);
+
+      -webkit-backdrop-filter:
+        blur(9px)
+        saturate(0.9);
+
+      border-top:
+        1px solid rgba(255,255,255,0.28);
+
+      box-shadow:
+        0 -1px 12px rgba(255,255,255,0.05);
+
+      overflow: hidden;
+
+      /*
+        O JS controla translateY.
+        Na abertura, só ~4cm ficam visíveis.
+      */
+
+      transform:
+        translate3d(0, calc(100vh - 42px), 0);
+
+      will-change: transform;
     }
 
-    /* =========================
-       INTRO NO PAPEL
-    ========================= */
 
-    .intro {
-      padding-bottom: 12vh;
+    /* ========================================
+       CONTEÚDO QUE EXISTE DENTRO DO VEGETAL
+    ======================================== */
 
-      border-bottom: 1px solid rgba(0,0,0,0.18);
+    .paper-content {
+      position: absolute;
+
+      top: 0;
+      left: 0;
+
+      width: 100%;
+
+      padding-bottom: 100px;
+
+      will-change: transform;
     }
 
-    .intro-name {
-      font-size: clamp(2.4rem, 5vw, 6rem);
+
+    /* ========================================
+       FAIXA QUE JÁ APARECE NA HOME
+
+       Essa primeira linha tem 42px,
+       então já aparece mesmo antes do scroll.
+    ======================================== */
+
+    .paper-header {
+      height: 42px;
+
+      width: 100%;
+
+      display: grid;
+
+      grid-template-columns:
+        minmax(150px, 0.8fr)
+        minmax(300px, 2fr)
+        minmax(100px, 0.6fr);
+
+      align-items: center;
+
+      gap: 24px;
+
+      padding:
+        0 32px;
+
+      border-bottom:
+        1px solid rgba(0,0,0,0.13);
+    }
+
+
+    .paper-name {
+      font-size: 15px;
+
+      line-height: 1;
 
       font-weight: 400;
+
+      letter-spacing: -0.025em;
+
+      white-space: nowrap;
+    }
+
+
+    .paper-description {
+      max-width: 620px;
+
+      font-size: 10px;
+
+      line-height: 1.2;
+
+      font-weight: 400;
+    }
+
+
+    .paper-location {
+      justify-self: end;
+
+      font-size: 9px;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.035em;
+
+      white-space: nowrap;
+    }
+
+
+    /* ========================================
+       APRESENTAÇÃO
+    ======================================== */
+
+    .intro {
+      min-height: 48vh;
+
+      padding:
+        52px 32px
+        68px;
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(12, 1fr);
+
+      column-gap: 14px;
+
+      border-bottom:
+        1px solid rgba(0,0,0,0.15);
+    }
+
+
+    .intro-title {
+      grid-column:
+        1 / 7;
+
+      align-self: start;
+
+      font-size:
+        clamp(36px, 5.4vw, 78px);
 
       line-height: 0.9;
 
-      letter-spacing: -0.055em;
+      font-weight: 400;
 
-      margin-bottom: 4vh;
+      letter-spacing: -0.06em;
     }
 
-    .intro-text {
-      max-width: 760px;
 
-      font-size: clamp(1rem, 1.5vw, 1.5rem);
+    .intro-copy {
+      grid-column:
+        8 / 12;
+
+      align-self: end;
+
+      max-width: 430px;
+
+      font-size:
+        clamp(13px, 1.15vw, 17px);
 
       line-height: 1.35;
-
-      font-weight: 400;
     }
 
-    .intro-meta {
-      display: flex;
-      justify-content: space-between;
-      gap: 30px;
 
-      margin-top: 7vh;
-
-      font-size: 0.78rem;
-
-      text-transform: uppercase;
-
-      letter-spacing: 0.04em;
-    }
-
-    /* =========================
+    /* ========================================
        PROJETOS
-    ========================= */
+    ======================================== */
 
     .projects {
-      padding-top: 10vh;
+      padding:
+        40px 32px
+        100px;
     }
 
-    .projects-head {
+
+    .projects-heading {
       display: flex;
-      justify-content: space-between;
-      align-items: baseline;
 
-      margin-bottom: 4vh;
+      align-items: baseline;
+      justify-content: space-between;
+
+      margin-bottom: 18px;
     }
 
-    .projects-title {
-      font-size: clamp(1rem, 1.3vw, 1.5rem);
+
+    .projects-heading h2 {
+      font-size: 12px;
 
       font-weight: 400;
 
-      letter-spacing: -0.02em;
+      letter-spacing: -0.01em;
     }
 
-    .projects-count {
-      font-size: 0.72rem;
+
+    .projects-heading span {
+      font-size: 9px;
 
       text-transform: uppercase;
 
-      letter-spacing: 0.04em;
+      letter-spacing: 0.035em;
     }
+
+
+    /* 4 POR LINHA */
 
     .projects-grid {
       display: grid;
 
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns:
+        repeat(4, minmax(0, 1fr));
 
-      gap: 14px;
+      gap: 10px;
     }
 
-    .project-card {
+
+    .project {
       position: relative;
 
       aspect-ratio: 4 / 5;
 
       overflow: hidden;
 
-      background: rgba(255,255,255,0.08);
-
       cursor: pointer;
+
+      background:
+        rgba(255,255,255,0.1);
     }
 
-    .project-image {
+
+    /* ========================================
+       PLACEHOLDERS
+
+       Depois substituímos por imagens reais.
+    ======================================== */
+
+    .project-media {
       position: absolute;
+
       inset: 0;
 
       width: 100%;
       height: 100%;
 
-      transition: transform 0.65s cubic-bezier(.2,.8,.2,1);
-    }
-
-    .project-card:hover .project-image {
-      transform: scale(1.025);
-    }
-
-    .project-overlay {
-      position: absolute;
-      inset: 0;
-
-      padding: 16px;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-
-      background: rgba(242, 240, 224, 0);
-
-      backdrop-filter: blur(0px);
-      -webkit-backdrop-filter: blur(0px);
-
-      opacity: 0;
-
       transition:
-        opacity 0.35s ease,
-        background 0.35s ease,
-        backdrop-filter 0.35s ease;
+        transform 0.65s
+        cubic-bezier(.2,.8,.2,1);
     }
 
-    .project-card:hover .project-overlay {
-      opacity: 1;
 
-      background: rgba(242, 240, 224, 0.58);
-
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-    }
-
-    .project-name {
-      font-size: clamp(1rem, 1.4vw, 1.4rem);
-
-      font-weight: 400;
-
-      letter-spacing: -0.03em;
-
-      line-height: 1;
-    }
-
-    .project-meta {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-
-      font-size: 0.65rem;
-
-      text-transform: uppercase;
-
-      letter-spacing: 0.04em;
-    }
-
-    .color1 {
+    .project:nth-child(1)
+    .project-media {
       background: #ff7377;
     }
 
-    .color2 {
-      background: #1e6870;
+
+    .project:nth-child(2)
+    .project-media {
+      background: #1f6870;
     }
 
-    .color3 {
-      background: #d38b56;
+
+    .project:nth-child(3)
+    .project-media {
+      background: #d48c56;
     }
 
-    .color4 {
+
+    .project:nth-child(4)
+    .project-media {
       background: #5da871;
     }
 
-    .color5 {
+
+    .project:nth-child(5)
+    .project-media {
       background: #ffe17a;
     }
 
-    .color6 {
+
+    .project:nth-child(6)
+    .project-media {
       background: #315545;
     }
 
-    .color7 {
+
+    .project:nth-child(7)
+    .project-media {
       background: #ffb267;
     }
 
-    .color8 {
-      background: #7c9674;
+
+    .project:nth-child(8)
+    .project-media {
+      background: #7e9575;
     }
 
-    /* =========================
-       CONTATO
-    ========================= */
 
-    .contact {
-      padding-top: 18vh;
-      padding-bottom: 8vh;
-    }
+    /* ========================================
+       PAPEL VEGETAL NO HOVER DOS PROJETOS
+    ======================================== */
 
-    .contact-line {
-      border-top: 1px solid rgba(0,0,0,0.2);
+    .project-overlay {
+      position: absolute;
 
-      padding-top: 18px;
+      inset: 0;
+
+      padding: 14px;
 
       display: flex;
-      justify-content: space-between;
-      gap: 20px;
 
-      font-size: 0.78rem;
+      flex-direction: column;
+
+      justify-content: space-between;
+
+      opacity: 0;
+
+      background:
+        rgba(246, 243, 226, 0.22);
+
+      backdrop-filter:
+        blur(14px);
+
+      -webkit-backdrop-filter:
+        blur(14px);
+
+      transition:
+        opacity 0.35s ease,
+        background 0.35s ease;
+    }
+
+
+    .project:hover
+    .project-overlay {
+      opacity: 1;
+
+      background:
+        rgba(246, 243, 226, 0.47);
+    }
+
+
+    .project:hover
+    .project-media {
+      transform: scale(1.025);
+    }
+
+
+    .project-title {
+      font-size:
+        clamp(15px, 1.45vw, 22px);
+
+      line-height: 0.95;
+
+      font-weight: 400;
+
+      letter-spacing: -0.035em;
+    }
+
+
+    .project-meta {
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 8px;
+
+      font-size: 8px;
+
+      line-height: 1;
 
       text-transform: uppercase;
 
-      letter-spacing: 0.04em;
+      letter-spacing: 0.035em;
     }
 
-    /* =========================
-       REVEAL
-    ========================= */
 
-    .reveal {
-      opacity: 0;
+    /* ========================================
+       CONTATO
+    ======================================== */
 
-      transform: translateY(35px);
-
-      transition:
-        opacity 0.8s cubic-bezier(.2,.8,.2,1),
-        transform 0.8s cubic-bezier(.2,.8,.2,1);
+    .contact {
+      padding:
+        80px 32px
+        40px;
     }
 
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
+
+    .contact-title {
+      font-size:
+        clamp(50px, 8vw, 120px);
+
+      line-height: 0.84;
+
+      font-weight: 400;
+
+      letter-spacing: -0.065em;
+
+      margin-bottom: 80px;
     }
 
-    /* =========================
+
+    .contact-bottom {
+      padding-top: 14px;
+
+      border-top:
+        1px solid rgba(0,0,0,0.16);
+
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 20px;
+
+      font-size: 9px;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.035em;
+    }
+
+
+    /* ========================================
        MOBILE
-    ========================= */
+    ======================================== */
 
-    @media (max-width: 900px) {
+    @media (max-width: 850px) {
+
+      .top-nav {
+        left: 20px;
+        right: 20px;
+
+        top: 20px;
+      }
+
+
+      .paper-header {
+        grid-template-columns:
+          auto 1fr;
+
+        height: 48px;
+
+        padding:
+          0 20px;
+
+        gap: 18px;
+      }
+
+
+      .paper-description {
+        font-size: 9px;
+      }
+
+
+      .paper-location {
+        display: none;
+      }
+
+
+      .intro {
+        display: block;
+
+        padding:
+          45px 20px
+          60px;
+      }
+
+
+      .intro-title {
+        margin-bottom: 100px;
+      }
+
+
+      .intro-copy {
+        max-width: 420px;
+      }
+
+
+      .projects {
+        padding:
+          35px 20px
+          80px;
+      }
+
 
       .projects-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
       }
 
-      .intro-meta {
-        flex-direction: column;
-      }
 
-      .blob {
-        width: 95vw;
-        height: 95vw;
-
-        filter: blur(58px);
+      .contact {
+        padding:
+          70px 20px
+          30px;
       }
 
     }
 
-    @media (max-width: 560px) {
 
-      .hero-nav {
-        top: 3vh;
-        left: 5vw;
-        right: 5vw;
+    @media (max-width: 520px) {
+
+      .paper-header {
+        height: 55px;
       }
 
-      .paper-inner {
-        padding:
-          7vh 5vw 10vh;
+
+      .paper-name {
+        font-size: 13px;
       }
+
+
+      .paper-description {
+        line-height: 1.1;
+      }
+
 
       .projects-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+
+        gap: 6px;
       }
 
-      .project-card {
-        aspect-ratio: 4 / 5;
+
+      .project-overlay {
+        padding: 10px;
       }
 
-      .contact-line {
+
+      .contact-bottom {
         flex-direction: column;
       }
 
     }
 
   </style>
+
 </head>
+
 
 <body>
 
-  <!-- FUNDO ANIMADO FIXO -->
+
+  <!-- =====================================
+       FUNDO ANIMADO
+  ====================================== -->
 
   <div class="background">
 
-    <div class="blob blob1"></div>
-    <div class="blob blob2"></div>
-    <div class="blob blob3"></div>
-    <div class="blob blob4"></div>
-    <div class="blob blob5"></div>
-    <div class="blob blob6"></div>
-    <div class="blob blob7"></div>
+    <img
+      class="background-gif"
+      src="animacao.gif"
+      alt=""
+    >
 
   </div>
 
-  <div class="cursor-glow"></div>
+
+  <!-- =====================================
+       MENU
+  ====================================== -->
+
+  <nav class="top-nav">
+
+    <a href="#" id="about-link">
+      Sobre mim
+    </a>
+
+    <a href="#" id="contact-link">
+      Contato
+    </a>
+
+  </nav>
 
 
-  <!-- PRIMEIRA TELA -->
+  <!-- =====================================
+       PAPEL VEGETAL
+  ====================================== -->
 
-  <section class="hero">
+  <section
+    class="paper"
+    id="paper"
+  >
 
-    <nav class="hero-nav">
-
-      <a href="#sobre">
-        Sobre mim
-      </a>
-
-      <a href="#contato">
-        Contato
-      </a>
-
-    </nav>
-
-  </section>
+    <div
+      class="paper-content"
+      id="paper-content"
+    >
 
 
-  <!-- PAPEL VEGETAL -->
+      <!-- FAIXA QUE JÁ APARECE EMBAIXO -->
 
-  <main class="paper">
+      <header class="paper-header">
 
-    <div class="paper-inner">
-
-
-      <!-- APRESENTAÇÃO -->
-
-      <section class="intro" id="sobre">
-
-        <h1 class="intro-name reveal">
+        <div class="paper-name">
           MARIANA MINA
-        </h1>
-
-        <p class="intro-text reveal">
-          Mariana Mina é designer e desenvolve projetos de identidade,
-          direção criativa e linguagem visual a partir de pesquisa,
-          conceito e experimentação.
-        </p>
-
-        <div class="intro-meta reveal">
-
-          <span>
-            São Paulo, Brasil
-          </span>
-
-          <span>
-            Design · Branding · Direção Criativa
-          </span>
-
         </div>
 
+        <div class="paper-description">
+          Designer e diretora criativa desenvolvendo identidades,
+          imagens e experiências visuais.
+        </div>
+
+        <div class="paper-location">
+          São Paulo · Brasil
+        </div>
+
+      </header>
+
+
+
+      <!-- SOBRE -->
+
+      <section
+        class="intro"
+        id="sobre"
+      >
+
+        <h1 class="intro-title">
+          Mariana<br>
+          Mina
+        </h1>
+
+        <p class="intro-copy">
+          Mariana desenvolve projetos de identidade,
+          direção criativa e linguagem visual a partir
+          de pesquisa, conceito e experimentação.
+        </p>
+
       </section>
+
 
 
       <!-- PROJETOS -->
 
       <section class="projects">
 
-        <div class="projects-head reveal">
+        <div class="projects-heading">
 
-          <h2 class="projects-title">
+          <h2>
             Projetos selecionados
           </h2>
 
-          <span class="projects-count">
+          <span>
             08 projetos
           </span>
 
@@ -727,19 +852,28 @@
         <div class="projects-grid">
 
 
-          <article class="project-card reveal">
+          <!-- 01 -->
 
-            <div class="project-image color1"></div>
+          <article class="project">
+
+            <div class="project-media"></div>
 
             <div class="project-overlay">
 
-              <div class="project-name">
+              <h3 class="project-title">
                 Projeto Um
-              </div>
+              </h3>
 
               <div class="project-meta">
-                <span>Identidade</span>
-                <span>2026</span>
+
+                <span>
+                  Identidade
+                </span>
+
+                <span>
+                  2026
+                </span>
+
               </div>
 
             </div>
@@ -747,19 +881,28 @@
           </article>
 
 
-          <article class="project-card reveal">
+          <!-- 02 -->
 
-            <div class="project-image color2"></div>
+          <article class="project">
+
+            <div class="project-media"></div>
 
             <div class="project-overlay">
 
-              <div class="project-name">
+              <h3 class="project-title">
                 Projeto Dois
-              </div>
+              </h3>
 
               <div class="project-meta">
-                <span>Branding</span>
-                <span>2026</span>
+
+                <span>
+                  Branding
+                </span>
+
+                <span>
+                  2026
+                </span>
+
               </div>
 
             </div>
@@ -767,19 +910,28 @@
           </article>
 
 
-          <article class="project-card reveal">
+          <!-- 03 -->
 
-            <div class="project-image color3"></div>
+          <article class="project">
+
+            <div class="project-media"></div>
 
             <div class="project-overlay">
 
-              <div class="project-name">
+              <h3 class="project-title">
                 Projeto Três
-              </div>
+              </h3>
 
               <div class="project-meta">
-                <span>Direção Criativa</span>
-                <span>2026</span>
+
+                <span>
+                  Direção Criativa
+                </span>
+
+                <span>
+                  2026
+                </span>
+
               </div>
 
             </div>
@@ -787,19 +939,28 @@
           </article>
 
 
-          <article class="project-card reveal">
+          <!-- 04 -->
 
-            <div class="project-image color4"></div>
+          <article class="project">
+
+            <div class="project-media"></div>
 
             <div class="project-overlay">
 
-              <div class="project-name">
+              <h3 class="project-title">
                 Projeto Quatro
-              </div>
+              </h3>
 
               <div class="project-meta">
-                <span>Editorial</span>
-                <span>2025</span>
+
+                <span>
+                  Editorial
+                </span>
+
+                <span>
+                  2025
+                </span>
+
               </div>
 
             </div>
@@ -807,19 +968,28 @@
           </article>
 
 
-          <article class="project-card reveal">
+          <!-- 05 -->
 
-            <div class="project-image color5"></div>
+          <article class="project">
+
+            <div class="project-media"></div>
 
             <div class="project-overlay">
 
-              <div class="project-name">
+              <h3 class="project-title">
                 Projeto Cinco
-              </div>
+              </h3>
 
               <div class="project-meta">
-                <span>Identidade</span>
-                <span>2025</span>
+
+                <span>
+                  Identidade
+                </span>
+
+                <span>
+                  2025
+                </span>
+
               </div>
 
             </div>
@@ -827,19 +997,28 @@
           </article>
 
 
-          <article class="project-card reveal">
+          <!-- 06 -->
 
-            <div class="project-image color6"></div>
+          <article class="project">
+
+            <div class="project-media"></div>
 
             <div class="project-overlay">
 
-              <div class="project-name">
+              <h3 class="project-title">
                 Projeto Seis
-              </div>
+              </h3>
 
               <div class="project-meta">
-                <span>Branding</span>
-                <span>2025</span>
+
+                <span>
+                  Branding
+                </span>
+
+                <span>
+                  2025
+                </span>
+
               </div>
 
             </div>
@@ -847,19 +1026,28 @@
           </article>
 
 
-          <article class="project-card reveal">
+          <!-- 07 -->
 
-            <div class="project-image color7"></div>
+          <article class="project">
+
+            <div class="project-media"></div>
 
             <div class="project-overlay">
 
-              <div class="project-name">
+              <h3 class="project-title">
                 Projeto Sete
-              </div>
+              </h3>
 
               <div class="project-meta">
-                <span>Campanha</span>
-                <span>2025</span>
+
+                <span>
+                  Campanha
+                </span>
+
+                <span>
+                  2025
+                </span>
+
               </div>
 
             </div>
@@ -867,19 +1055,28 @@
           </article>
 
 
-          <article class="project-card reveal">
+          <!-- 08 -->
 
-            <div class="project-image color8"></div>
+          <article class="project">
+
+            <div class="project-media"></div>
 
             <div class="project-overlay">
 
-              <div class="project-name">
+              <h3 class="project-title">
                 Projeto Oito
-              </div>
+              </h3>
 
               <div class="project-meta">
-                <span>Direção</span>
-                <span>2024</span>
+
+                <span>
+                  Direção
+                </span>
+
+                <span>
+                  2024
+                </span>
+
               </div>
 
             </div>
@@ -892,11 +1089,20 @@
       </section>
 
 
+
       <!-- CONTATO -->
 
-      <section class="contact" id="contato">
+      <section
+        class="contact"
+        id="contato"
+      >
 
-        <div class="contact-line reveal">
+        <h2 class="contact-title">
+          Vamos<br>
+          conversar?
+        </h2>
+
+        <div class="contact-bottom">
 
           <span>
             Instagram
@@ -917,107 +1123,327 @@
 
     </div>
 
-  </main>
+  </section>
+
+
+  <!--
+    ESSA DIV SÓ CRIA O ESPAÇO DE SCROLL.
+    ELA NÃO APARECE VISUALMENTE.
+  -->
+
+  <div id="scroll-space"></div>
+
 
 
   <script>
 
-    /* =========================
-       MOUSE
-    ========================= */
+    /* ==========================================
+       ELEMENTOS
+    ========================================== */
 
-    const glow =
-      document.querySelector(".cursor-glow");
+    const paper =
+      document.getElementById("paper");
 
-    window.addEventListener(
-      "mousemove",
-      (event) => {
+    const paperContent =
+      document.getElementById("paper-content");
 
-        glow.style.left =
-          event.clientX + "px";
+    const scrollSpace =
+      document.getElementById("scroll-space");
 
-        glow.style.top =
-          event.clientY + "px";
+    const aboutLink =
+      document.getElementById("about-link");
+
+    const contactLink =
+      document.getElementById("contact-link");
+
+
+    /*
+      Quanto do papel aparece na abertura.
+
+      42 px fica próximo de 4 cm visuais
+      na configuração atual.
+
+      Se depois você quiser maior ou menor,
+      é só mudar aqui.
+    */
+
+    let peekHeight = 42;
+
+
+    /*
+      Distância de scroll necessária
+      para o papel subir totalmente.
+
+      0.72 = ele sobe relativamente rápido,
+      sem precisar rolar uma tela inteira.
+    */
+
+    let revealDistance =
+      window.innerHeight * 0.72;
+
+
+    /* ==========================================
+       TAMANHOS
+    ========================================== */
+
+    function calculateSizes() {
+
+      /*
+        No mobile usamos a altura maior
+        da faixa inferior.
+      */
+
+      if (
+        window.innerWidth <= 520
+      ) {
+
+        peekHeight = 55;
 
       }
-    );
+
+      else if (
+        window.innerWidth <= 850
+      ) {
+
+        peekHeight = 48;
+
+      }
+
+      else {
+
+        peekHeight = 42;
+
+      }
 
 
-    /* =========================
-       FUNDO REAGE AO MOUSE
-    ========================= */
+      revealDistance =
+        window.innerHeight * 0.72;
 
-    const blobs =
-      document.querySelectorAll(".blob");
 
-    window.addEventListener(
-      "mousemove",
-      (event) => {
+      /*
+        Quantos pixels de conteúdo
+        existem além da viewport.
+      */
 
-        const x =
-          event.clientX / window.innerWidth - 0.5;
+      const contentHeight =
+        paperContent.scrollHeight;
 
-        const y =
-          event.clientY / window.innerHeight - 0.5;
 
-        blobs.forEach(
-          (blob, index) => {
-
-            const force =
-              (index + 1) * 2.5;
-
-            blob.style.marginLeft =
-              x * force + "px";
-
-            blob.style.marginTop =
-              y * force + "px";
-
-          }
+      const insideScroll =
+        Math.max(
+          0,
+          contentHeight -
+          window.innerHeight
         );
 
+
+      /*
+        O documento invisível precisa
+        permitir:
+
+        1. levantar o vegetal
+        2. depois subir o conteúdo dentro dele
+      */
+
+      const totalScroll =
+        revealDistance +
+        insideScroll +
+        120;
+
+
+      scrollSpace.style.height =
+        (
+          window.innerHeight +
+          totalScroll
+        )
+        + "px";
+
+
+      updateScene();
+
+    }
+
+
+    /* ==========================================
+       MOVIMENTO
+    ========================================== */
+
+    function updateScene() {
+
+      const y =
+        window.scrollY;
+
+
+      /*
+        FASE 1
+
+        0 → revealDistance
+
+        A folha sobe do rodapé
+        até cobrir a viewport.
+      */
+
+      const revealProgress =
+        Math.min(
+          1,
+          Math.max(
+            0,
+            y / revealDistance
+          )
+        );
+
+
+      const startY =
+        window.innerHeight -
+        peekHeight;
+
+
+      const paperY =
+        startY *
+        (
+          1 -
+          revealProgress
+        );
+
+
+      paper.style.transform =
+        `translate3d(0, ${paperY}px, 0)`;
+
+
+      /*
+        FASE 2
+
+        Só começa depois que a folha
+        terminou de subir.
+
+        Agora é o CONTEÚDO dentro
+        dela que continua subindo.
+      */
+
+      const contentScroll =
+        Math.max(
+          0,
+          y -
+          revealDistance
+        );
+
+
+      const maxContentScroll =
+        Math.max(
+          0,
+          paperContent.scrollHeight -
+          window.innerHeight
+        );
+
+
+      const clampedContentScroll =
+        Math.min(
+          contentScroll,
+          maxContentScroll
+        );
+
+
+      paperContent.style.transform =
+        `translate3d(
+          0,
+          ${-clampedContentScroll}px,
+          0
+        )`;
+
+    }
+
+
+    /* ==========================================
+       MENU
+    ========================================== */
+
+    aboutLink.addEventListener(
+      "click",
+      function(event) {
+
+        event.preventDefault();
+
+        /*
+          Faz a folha subir completamente,
+          deixando a introdução visível.
+        */
+
+        window.scrollTo({
+          top: revealDistance,
+          behavior: "smooth"
+        });
+
       }
     );
 
 
-    /* =========================
-       REVEAL
-    ========================= */
+    contactLink.addEventListener(
+      "click",
+      function(event) {
 
-    const revealItems =
-      document.querySelectorAll(".reveal");
+        event.preventDefault();
 
-    const observer =
-      new IntersectionObserver(
+        /*
+          Descobre onde o contato está
+          dentro do conteúdo.
+        */
 
-        (entries) => {
-
-          entries.forEach(
-            (entry) => {
-
-              if (entry.isIntersecting) {
-
-                entry.target.classList.add(
-                  "visible"
-                );
-
-              }
-
-            }
+        const contact =
+          document.getElementById(
+            "contato"
           );
 
-        },
 
-        {
-          threshold: 0.1
-        }
+        const contactTop =
+          contact.offsetTop;
 
-      );
 
-    revealItems.forEach(
-      (item) => observer.observe(item)
+        window.scrollTo({
+
+          top:
+            revealDistance +
+            contactTop -
+            80,
+
+          behavior:
+            "smooth"
+
+        });
+
+      }
     );
+
+
+    /* ==========================================
+       EVENTOS
+    ========================================== */
+
+    window.addEventListener(
+      "scroll",
+      updateScene,
+      {
+        passive: true
+      }
+    );
+
+
+    window.addEventListener(
+      "resize",
+      calculateSizes
+    );
+
+
+    window.addEventListener(
+      "load",
+      calculateSizes
+    );
+
+
+    calculateSizes();
 
   </script>
 
+
 </body>
+
 </html>
