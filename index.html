@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Mariana Mina</title>
+
+  <!-- SATOSHI -->
+  <link
+    href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600,700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+
+    /* ================================
+       RESET
+    ================================= */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Satoshi", sans-serif;
+      background: #315545;
+      color: #111;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+
+    /* ================================
+       FUNDO ANIMADO
+    ================================= */
+
+    .animated-background {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      z-index: 0;
+      background: #315545;
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.9;
+      transform: translate(-50%, -50%);
+      will-change: transform;
+      mix-blend-mode: screen;
+    }
+
+    .blob-1 {
+      width: 65vw;
+      height: 65vw;
+      background: #ff7377;
+      left: 15%;
+      top: 20%;
+      animation: float1 15s ease-in-out infinite alternate;
+    }
+
+    .blob-2 {
+      width: 58vw;
+      height: 58vw;
+      background: #ffb66b;
+      left: 75%;
+      top: 15%;
+      animation: float2 19s ease-in-out infinite alternate;
+    }
+
+    .blob-3 {
+      width: 52vw;
+      height: 52vw;
+      background: #ffe580;
+      left: 55%;
+      top: 70%;
+      animation: float3 17s ease-in-out infinite alternate;
+    }
+
+    .blob-4 {
+      width: 50vw;
+      height: 50vw;
+      background: #f6ef19;
+      left: 20%;
+      top: 80%;
+      animation: float4 20s ease-in-out infinite alternate;
+    }
+
+    .blob-5 {
+      width: 60vw;
+      height: 60vw;
+      background: #1e6870;
+      left: 90%;
+      top: 65%;
+      animation: float5 16s ease-in-out infinite alternate;
+    }
+
+    .blob-6 {
+      width: 48vw;
+      height: 48vw;
+      background: #5da972;
+      left: 45%;
+      top: 35%;
+      animation: float6 21s ease-in-out infinite alternate;
+    }
+
+    .blob-7 {
+      width: 42vw;
+      height: 42vw;
+      background: #d58c56;
+      left: 0%;
+      top: 55%;
+      animation: float7 18s ease-in-out infinite alternate;
+    }
+
+    @keyframes float1 {
+      from {
+        transform: translate(-50%, -50%) translate(-5vw, -3vh) scale(1);
+      }
+      to {
+        transform: translate(-50%, -50%) translate(15vw, 15vh) scale(1.15);
+      }
+    }
+
+    @keyframes float2 {
+      from {
+        transform: translate(-50%, -50%) translate(5vw, 0) scale(1.1);
+      }
+      to {
+        transform: translate(-50%, -50%) translate(-18vw, 18vh) scale(0.9);
+      }
+    }
+
+    @keyframes float3 {
+      from {
+        transform: translate(-50%, -50%) translate(0, 8vh);
+      }
+      to {
+        transform: translate(-50%, -50%) translate(15vw, -20vh) scale(1.2);
+      }
+    }
+
+    @keyframes float4 {
+      from {
+        transform: translate(-50%, -50%) translate(-10vw, 0);
+      }
+      to {
+        transform: translate(-50%, -50%) translate(18vw, -20vh) scale(1.15);
+      }
+    }
+
+    @keyframes float5 {
+      from {
+        transform: translate(-50%, -50%) scale(1.2);
+      }
+      to {
+        transform: translate(-50%, -50%) translate(-25vw, -10vh) scale(0.9);
+      }
+    }
+
+    @keyframes float6 {
+      from {
+        transform: translate(-50%, -50%) translate(5vw, 8vh);
+      }
+      to {
+        transform: translate(-50%, -50%) translate(-15vw, 12vh) scale(1.25);
+      }
+    }
+
+    @keyframes float7 {
+      from {
+        transform: translate(-50%, -50%) scale(1);
+      }
+      to {
+        transform: translate(-50%, -50%) translate(25vw, 5vh) scale(1.3);
+      }
+    }
+
+
+    /* ================================
+       BRILHO QUE SEGUE O MOUSE
+    ================================= */
+
+    .mouse-glow {
+      position: fixed;
+      width: 55vw;
+      height: 55vw;
+
+      left: 50%;
+      top: 50%;
+
+      transform: translate(-50%, -50%);
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(255,255,255,0.22) 0%,
+          rgba(255,229,128,0.13) 25%,
+          rgba(255,115,119,0.08) 45%,
+          transparent 70%
+        );
+
+      filter: blur(35px);
+
+      pointer-events: none;
+      z-index: 1;
+
+      transition:
+        left 0.7s cubic-bezier(.2,.8,.2,1),
+        top 0.7s cubic-bezier(.2,.8,.2,1);
+    }
+
+
+    /* ================================
+       PRIMEIRA TELA
+    ================================= */
+
+    .hero {
+      position: relative;
+      z-index: 2;
+
+      height: 100vh;
+      width: 100%;
+
+      color: #111;
+    }
+
+    .hero a,
+    .hero .name {
+      position: absolute;
+      z-index: 4;
+    }
+
+    .name {
+      left: 4vw;
+      top: 4vh;
+
+      font-size: clamp(2.6rem, 6vw, 7rem);
+      font-weight: 500;
+      letter-spacing: -0.06em;
+
+      line-height: 0.9;
+    }
+
+    .about-link {
+      right: 5vw;
+      top: 7vh;
+    }
+
+    .projects-link {
+      left: 5vw;
+      bottom: 7vh;
+    }
+
+    .contact-link {
+      right: 5vw;
+      bottom: 7vh;
+    }
+
+    .menu-link {
+      font-size: clamp(0.9rem, 1.15vw, 1.25rem);
+      font-weight: 400;
+
+      letter-spacing: 0.01em;
+
+      transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+    }
+
+    .menu-link:hover {
+      opacity: 0.55;
+      transform: translateY(-3px);
+    }
+
+    .scroll-hint {
+      position: absolute;
+
+      left: 50%;
+      bottom: 6vh;
+
+      transform: translateX(-50%);
+
+      font-size: 12px;
+      letter-spacing: 0.09em;
+
+      text-transform: uppercase;
+      opacity: 0.65;
+
+      writing-mode: vertical-rl;
+    }
+
+
+    /* ================================
+       PAPEL VEGETAL
+    ================================= */
+
+    .content {
+      position: relative;
+      z-index: 5;
+
+      min-height: 250vh;
+
+      background: rgba(246, 244, 226, 0.54);
+
+      backdrop-filter: blur(34px);
+      -webkit-backdrop-filter: blur(34px);
+
+      border-top-left-radius: 35px;
+      border-top-right-radius: 35px;
+
+      box-shadow:
+        0 -1px 0 rgba(255,255,255,0.35);
+
+      padding: 10vh 5vw 15vh;
+
+      color: #111;
+    }
+
+
+    /* ================================
+       SOBRE
+    ================================= */
+
+    .section-label {
+      font-size: 13px;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.09em;
+
+      margin-bottom: 3rem;
+    }
+
+    .about {
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .about-text {
+      font-size: clamp(2.2rem, 5.6vw, 6.7rem);
+
+      line-height: 0.98;
+
+      font-weight: 400;
+
+      letter-spacing: -0.045em;
+
+      max-width: 1250px;
+    }
+
+    .small-info {
+      display: flex;
+      justify-content: space-between;
+      gap: 40px;
+
+      margin-top: 8vh;
+
+      font-size: clamp(0.95rem, 1.2vw, 1.3rem);
+
+      line-height: 1.5;
+    }
+
+    .small-info p {
+      max-width: 420px;
+    }
+
+
+    /* ================================
+       PROJETOS
+    ================================= */
+
+    .projects {
+      padding-top: 15vh;
+    }
+
+    .projects-title {
+      font-size: clamp(3rem, 8vw, 9rem);
+
+      font-weight: 500;
+
+      letter-spacing: -0.06em;
+
+      margin-bottom: 8vh;
+    }
+
+    .project-grid {
+      display: grid;
+
+      grid-template-columns: repeat(12, 1fr);
+
+      gap: 2vw;
+
+      align-items: start;
+    }
+
+    .project {
+      position: relative;
+
+      overflow: hidden;
+
+      background: rgba(255,255,255,0.12);
+
+      min-height: 400px;
+
+      cursor: pointer;
+    }
+
+    .project img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      display: block;
+
+      transition:
+        transform 0.7s cubic-bezier(.2,.8,.2,1),
+        filter 0.5s ease;
+    }
+
+    .project-overlay {
+      position: absolute;
+
+      inset: 0;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      padding: 25px;
+
+      background: rgba(242, 239, 216, 0);
+
+      backdrop-filter: blur(0px);
+      -webkit-backdrop-filter: blur(0px);
+
+      opacity: 0;
+
+      transition:
+        opacity 0.45s ease,
+        background 0.45s ease,
+        backdrop-filter 0.45s ease;
+    }
+
+    .project:hover .project-overlay {
+      opacity: 1;
+
+      background: rgba(242, 239, 216, 0.65);
+
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .project:hover img {
+      transform: scale(1.025);
+    }
+
+    .project-name {
+      font-size: clamp(1.8rem, 3vw, 4rem);
+
+      line-height: 0.95;
+
+      letter-spacing: -0.04em;
+    }
+
+    .project-meta {
+      display: flex;
+      justify-content: space-between;
+
+      font-size: 0.9rem;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.05em;
+    }
+
+    .project:nth-child(1) {
+      grid-column: 1 / 8;
+      height: 70vh;
+    }
+
+    .project:nth-child(2) {
+      grid-column: 9 / 13;
+      height: 52vh;
+      margin-top: 15vh;
+    }
+
+    .project:nth-child(3) {
+      grid-column: 3 / 11;
+      height: 75vh;
+      margin-top: 10vh;
+    }
+
+
+    /* placeholders enquanto não temos imagens */
+
+    .placeholder-1 {
+      background: #ff7377;
+    }
+
+    .placeholder-2 {
+      background: #1e6870;
+    }
+
+    .placeholder-3 {
+      background: #d58c56;
+    }
+
+
+    /* ================================
+       CONTATO
+    ================================= */
+
+    .contact {
+      min-height: 90vh;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+
+      padding-top: 20vh;
+    }
+
+    .contact-title {
+      font-size: clamp(4rem, 10vw, 12rem);
+
+      font-weight: 500;
+
+      letter-spacing: -0.075em;
+
+      line-height: 0.8;
+    }
+
+    .contact-bottom {
+      margin-top: 8vh;
+
+      display: flex;
+      justify-content: space-between;
+
+      border-top: 1px solid rgba(0,0,0,0.25);
+
+      padding-top: 20px;
+    }
+
+
+    /* ================================
+       ANIMAÇÃO DE ENTRADA NO SCROLL
+    ================================= */
+
+    .reveal {
+      opacity: 0;
+
+      transform: translateY(70px);
+
+      transition:
+        opacity 1s cubic-bezier(.2,.8,.2,1),
+        transform 1s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+
+      transform: translateY(0);
+    }
+
+
+    /* ================================
+       MOBILE
+    ================================= */
+
+    @media (max-width: 700px) {
+
+      .name {
+        font-size: 13vw;
+        left: 5vw;
+        top: 4vh;
+      }
+
+      .about-link {
+        right: 5vw;
+        top: 24vh;
+      }
+
+      .projects-link {
+        left: 5vw;
+        bottom: 8vh;
+      }
+
+      .contact-link {
+        right: 5vw;
+        bottom: 8vh;
+      }
+
+      .small-info {
+        flex-direction: column;
+      }
+
+      .project-grid {
+        display: block;
+      }
+
+      .project,
+      .project:nth-child(1),
+      .project:nth-child(2),
+      .project:nth-child(3) {
+        width: 100%;
+
+        height: 65vh;
+
+        margin: 0 0 25px 0;
+      }
+
+      .content {
+        border-radius: 22px 22px 0 0;
+      }
+
+      .contact-bottom {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .blob {
+        filter: blur(60px);
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+  <!-- =========================
+       FUNDO
+  ========================== -->
+
+  <div class="animated-background">
+
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
+    <div class="blob blob-5"></div>
+    <div class="blob blob-6"></div>
+    <div class="blob blob-7"></div>
+
+  </div>
+
+  <div class="mouse-glow"></div>
+
+
+  <!-- =========================
+       HOME
+  ========================== -->
+
+  <section class="hero">
+
+    <div class="name">
+      MARIANA<br>MINA
+    </div>
+
+    <a class="menu-link about-link" href="#sobre">
+      SOBRE
+    </a>
+
+    <a class="menu-link projects-link" href="#projetos">
+      PROJETOS
+    </a>
+
+    <a class="menu-link contact-link" href="#contato">
+      CONTATO
+    </a>
+
+    <div class="scroll-hint">
+      scroll
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       PAPEL VEGETAL
+  ========================== -->
+
+  <main class="content">
+
+
+    <!-- SOBRE -->
+
+    <section class="about" id="sobre">
+
+      <div>
+
+        <div class="section-label reveal">
+          Sobre
+        </div>
+
+        <div class="about-text reveal">
+          Mariana Mina é designer e cria experiências visuais entre identidade, imagem e direção criativa.
+        </div>
+
+      </div>
+
+      <div class="small-info reveal">
+
+        <p>
+          Trabalhos construídos a partir de conceito,
+          pesquisa, experimentação e linguagem visual.
+        </p>
+
+        <p>
+          São Paulo, Brasil<br>
+          Disponível para projetos e colaborações.
+        </p>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- PROJETOS -->
+
+    <section class="projects" id="projetos">
+
+      <div class="section-label reveal">
+        Projetos selecionados
+      </div>
+
+      <h2 class="projects-title reveal">
+        Projetos
+      </h2>
+
+      <div class="project-grid">
+
+
+        <article class="project placeholder-1 reveal">
+
+          <div class="project-overlay">
+
+            <div class="project-name">
+              Projeto Um
+            </div>
+
+            <div class="project-meta">
+
+              <span>Identidade Visual</span>
+
+              <span>2026</span>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+
+        <article class="project placeholder-2 reveal">
+
+          <div class="project-overlay">
+
+            <div class="project-name">
+              Projeto Dois
+            </div>
+
+            <div class="project-meta">
+
+              <span>Direção Criativa</span>
+
+              <span>2026</span>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+
+        <article class="project placeholder-3 reveal">
+
+          <div class="project-overlay">
+
+            <div class="project-name">
+              Projeto Três
+            </div>
+
+            <div class="project-meta">
+
+              <span>Branding</span>
+
+              <span>2025</span>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+      </div>
+
+    </section>
+
+
+
+    <!-- CONTATO -->
+
+    <section class="contact" id="contato">
+
+      <div class="section-label reveal">
+        Contato
+      </div>
+
+      <div class="contact-title reveal">
+        Vamos<br>conversar?
+      </div>
+
+      <div class="contact-bottom reveal">
+
+        <span>
+          Instagram
+        </span>
+
+        <span>
+          E-mail
+        </span>
+
+        <span>
+          © 2026 Mariana Mina
+        </span>
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+  <script>
+
+
+    /* =================================
+       MOUSE INTERATIVO
+    ================================= */
+
+    const glow = document.querySelector(".mouse-glow");
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+
+
+    window.addEventListener("mousemove", (event) => {
+
+      mouseX = event.clientX;
+      mouseY = event.clientY;
+
+      glow.style.left = mouseX + "px";
+      glow.style.top = mouseY + "px";
+
+    });
+
+
+    /* =================================
+       MOVIMENTO SUAVE DOS BLOBS
+       BASEADO NO MOUSE
+    ================================= */
+
+    const blobs = document.querySelectorAll(".blob");
+
+    document.addEventListener("mousemove", (event) => {
+
+      const x =
+        (event.clientX / window.innerWidth - 0.5);
+
+      const y =
+        (event.clientY / window.innerHeight - 0.5);
+
+
+      blobs.forEach((blob, index) => {
+
+        const strength =
+          (index + 1) * 2;
+
+        blob.style.marginLeft =
+          x * strength + "px";
+
+        blob.style.marginTop =
+          y * strength + "px";
+
+      });
+
+    });
+
+
+
+    /* =================================
+       CONTEÚDO APARECENDO NO SCROLL
+    ================================= */
+
+    const revealElements =
+      document.querySelectorAll(".reveal");
+
+
+    const observer =
+      new IntersectionObserver(
+
+        (entries) => {
+
+          entries.forEach((entry) => {
+
+            if (entry.isIntersecting) {
+
+              entry.target.classList.add("visible");
+
+            }
+
+          });
+
+        },
+
+        {
+          threshold: 0.15
+        }
+
+      );
+
+
+    revealElements.forEach((element) => {
+
+      observer.observe(element);
+
+    });
+
+
+  </script>
+
+
+</body>
+</html>
