@@ -56,28 +56,33 @@
       border: 0;
       background: transparent;
       color: white;
-      cursor: pointer;
+      cursor: grab;
       position: absolute;
       z-index: 1;
-      width: 136px;
+      width: 120px;
       display: grid;
       justify-items: center;
-      gap: 8px;
+      gap: 7px;
       padding: 0;
       font: inherit;
+      touch-action: none;
+      user-select: none;
       text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
-      transition: transform 0.18s ease;
     }
 
-    .file:hover,
+    .file:active {
+      cursor: grabbing;
+    }
+
     .file:focus-visible {
-      transform: scale(1.07);
-      outline: none;
+      outline: 1px solid white;
+      outline-offset: 5px;
+      border-radius: 4px;
     }
 
     .file .thumb {
-      width: 94px;
-      height: 70px;
+      width: 68px;
+      height: 51px;
       overflow: hidden;
       border: 2px solid rgba(255, 255, 255, 0.92);
       box-shadow: 0 3px 10px rgba(0, 0, 0, 0.45);
@@ -87,14 +92,18 @@
     .file video {
       width: 100%;
       height: 100%;
-      object-fit: cover;
       display: block;
+      object-fit: cover;
     }
 
     .file span {
-      font-size: 13px;
+      max-width: 125px;
+      font-size: 12px;
       font-weight: 500;
+      line-height: 1.1;
       letter-spacing: -0.025em;
+      text-align: center;
+      overflow-wrap: anywhere;
     }
 
     .project-one {
@@ -105,17 +114,17 @@
     .folder {
       left: 72%;
       bottom: 14%;
-      width: 152px;
+      width: 100px;
     }
 
     .folder img {
-      width: 120px;
+      width: 72px;
       display: block;
       filter: drop-shadow(0 4px 5px rgba(0, 0, 0, 0.3));
     }
 
     .folder span {
-      font-size: 14px;
+      font-size: 13px;
     }
 
     .hint {
@@ -184,11 +193,19 @@
       padding: 0 14px;
       background: linear-gradient(#f5f5f5, #dedede);
       border-bottom: 1px solid #bababa;
+      cursor: grab;
+      user-select: none;
+      touch-action: none;
+    }
+
+    .titlebar:active {
+      cursor: grabbing;
     }
 
     .dot {
       width: 13px;
       height: 13px;
+      flex: 0 0 auto;
       padding: 0;
       border-radius: 50%;
       border: 1px solid rgba(0, 0, 0, 0.16);
@@ -212,6 +229,7 @@
       font-size: 13px;
       font-weight: 600;
       color: #3a3a3a;
+      pointer-events: none;
     }
 
     .player {
@@ -221,8 +239,12 @@
       background: black;
     }
 
+    .contact-window {
+      width: min(430px, calc(100vw - 32px));
+    }
+
     .contact {
-      display: none;
+      display: block;
       padding: 24px;
       background: #f7f7f7;
       color: #111;
@@ -247,14 +269,13 @@
       text-decoration: underline;
     }
 
-    .contact-window {
-      width: min(430px, calc(100vw - 32px));
-    }
-
     .window.full {
-      width: 100vw;
-      height: 100svh;
+      width: 100vw !important;
+      height: 100svh !important;
       max-width: none;
+      left: 0 !important;
+      top: 0 !important;
+      transform: none !important;
       border-radius: 0;
     }
 
@@ -289,38 +310,54 @@
 </head>
 
 <body>
-  <main class="desktop">
+  <main class="desktop" id="desktop">
     <h1 class="brand">Mariana Mina</h1>
 
-    <button class="file project-one" type="button" data-open="video-window">
+    <button
+      class="file project-one draggable-file"
+      type="button"
+      data-open="video-window"
+      aria-label="Abrir CRICRI-ONLINE-V3"
+    >
       <span class="thumb">
-        <video src="video1.MP4" muted loop playsinline preload="metadata"></video>
+        <video src="video1.MP4" muted playsinline preload="auto"></video>
       </span>
-      <span>vídeo 01</span>
+      <span>CRICRI-ONLINE-V3.mp4</span>
     </button>
 
-    <button class="file folder" type="button" data-open="contact-window">
+    <button
+      class="file folder draggable-file"
+      type="button"
+      data-open="contact-window"
+      aria-label="Abrir contatos"
+    >
       <img src="folder.PNG" alt="" />
       <span>contato</span>
     </button>
 
-    <p class="hint">clique nos arquivos para abrir</p>
+    <p class="hint">arraste os arquivos ou clique para abrir</p>
   </main>
 
   <div class="overlay" id="overlay"></div>
 
-  <section class="window" id="video-window">
+  <section class="window" id="video-window" aria-label="CRICRI ONLINE V3">
     <div class="titlebar">
       <button class="dot red" data-close aria-label="Fechar"></button>
       <span class="dot yellow"></span>
       <button class="dot green" data-full aria-label="Expandir vídeo"></button>
-      <span class="title">vídeo 01.MP4</span>
+      <span class="title">CRICRI-ONLINE-V3.mp4</span>
     </div>
 
-    <video class="player" id="main-video" src="video1.MP4" controls playsinline></video>
+    <video
+      class="player"
+      id="main-video"
+      src="video1.MP4"
+      controls
+      playsinline
+    ></video>
   </section>
 
-  <section class="window contact-window" id="contact-window">
+  <section class="window contact-window" id="contact-window" aria-label="Contato">
     <div class="titlebar">
       <button class="dot red" data-close aria-label="Fechar"></button>
       <span class="dot yellow"></span>
@@ -330,39 +367,43 @@
 
     <div class="contact">
       <p>Vamos conversar?</p>
+
+      <!-- Trocar depois pelo e-mail e Instagram reais dela -->
       <a href="mailto:email@exemplo.com">email@exemplo.com</a>
       <a href="#">instagram</a>
     </div>
   </section>
 
   <script>
+    const desktop = document.querySelector("#desktop");
     const overlay = document.querySelector("#overlay");
-    const video = document.querySelector("#main-video");
-
-    document.querySelectorAll(".thumb video").forEach((videozinho) => {
-      videozinho.play().catch(() => {});
-    });
+    const mainVideo = document.querySelector("#main-video");
 
     function closeAll() {
       document.querySelectorAll(".window").forEach((window) => {
         window.classList.remove("open", "full");
+        window.style.left = "";
+        window.style.top = "";
+        window.style.transform = "";
       });
 
       overlay.classList.remove("visible");
-      video.pause();
+      mainVideo.pause();
     }
 
     document.querySelectorAll("[data-open]").forEach((button) => {
       button.addEventListener("click", () => {
+        if (button.dataset.dragged === "true") return;
+
         const window = document.querySelector(`#${button.dataset.open}`);
 
         window.classList.add("open");
         overlay.classList.add("visible");
 
         if (window.id === "video-window") {
-          video.currentTime = 0;
-          video.muted = false;
-          video.play().catch(() => {});
+          mainVideo.currentTime = 0;
+          mainVideo.muted = false;
+          mainVideo.play().catch(() => {});
         }
       });
     });
@@ -380,6 +421,128 @@
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape") closeAll();
     });
+
+    function makeDesktopFilesDraggable() {
+      document.querySelectorAll(".draggable-file").forEach((file) => {
+        let startX;
+        let startY;
+        let initialLeft;
+        let initialTop;
+        let moved = false;
+
+        file.addEventListener("pointerdown", (event) => {
+          startX = event.clientX;
+          startY = event.clientY;
+          moved = false;
+
+          const fileRect = file.getBoundingClientRect();
+          const desktopRect = desktop.getBoundingClientRect();
+
+          initialLeft = fileRect.left - desktopRect.left;
+          initialTop = fileRect.top - desktopRect.top;
+
+          file.setPointerCapture(event.pointerId);
+        });
+
+        file.addEventListener("pointermove", (event) => {
+          if (!file.hasPointerCapture(event.pointerId)) return;
+
+          const moveX = event.clientX - startX;
+          const moveY = event.clientY - startY;
+
+          if (Math.abs(moveX) > 5 || Math.abs(moveY) > 5) {
+            moved = true;
+          }
+
+          if (!moved) return;
+
+          const desktopRect = desktop.getBoundingClientRect();
+          const fileRect = file.getBoundingClientRect();
+
+          let newLeft = initialLeft + moveX;
+          let newTop = initialTop + moveY;
+
+          newLeft = Math.max(0, Math.min(newLeft, desktopRect.width - fileRect.width));
+          newTop = Math.max(0, Math.min(newTop, desktopRect.height - fileRect.height));
+
+          file.style.left = `${newLeft}px`;
+          file.style.top = `${newTop}px`;
+          file.style.right = "auto";
+          file.style.bottom = "auto";
+        });
+
+        file.addEventListener("pointerup", (event) => {
+          if (!file.hasPointerCapture(event.pointerId)) return;
+
+          file.releasePointerCapture(event.pointerId);
+
+          if (moved) {
+            file.dataset.dragged = "true";
+
+            setTimeout(() => {
+              file.dataset.dragged = "false";
+            }, 50);
+          }
+        });
+      });
+    }
+
+    function makeWindowsDraggable() {
+      document.querySelectorAll(".window").forEach((window) => {
+        const titlebar = window.querySelector(".titlebar");
+
+        let startX;
+        let startY;
+        let initialLeft;
+        let initialTop;
+
+        titlebar.addEventListener("pointerdown", (event) => {
+          if (event.target.classList.contains("dot")) return;
+          if (window.classList.contains("full")) return;
+
+          const windowRect = window.getBoundingClientRect();
+
+          startX = event.clientX;
+          startY = event.clientY;
+          initialLeft = windowRect.left;
+          initialTop = windowRect.top;
+
+          window.style.left = `${initialLeft}px`;
+          window.style.top = `${initialTop}px`;
+          window.style.transform = "none";
+
+          titlebar.setPointerCapture(event.pointerId);
+        });
+
+        titlebar.addEventListener("pointermove", (event) => {
+          if (!titlebar.hasPointerCapture(event.pointerId)) return;
+          if (window.classList.contains("full")) return;
+
+          const moveX = event.clientX - startX;
+          const moveY = event.clientY - startY;
+
+          const windowRect = window.getBoundingClientRect();
+
+          let newLeft = initialLeft + moveX;
+          let newTop = initialTop + moveY;
+
+          newLeft = Math.max(0, Math.min(newLeft, window.innerWidth - windowRect.width));
+          newTop = Math.max(0, Math.min(newTop, window.innerHeight - 42));
+
+          window.style.left = `${newLeft}px`;
+          window.style.top = `${newTop}px`;
+        });
+
+        titlebar.addEventListener("pointerup", (event) => {
+          if (titlebar.hasPointerCapture(event.pointerId)) {
+            titlebar.releasePointerCapture(event.pointerId);
+          }
+        });
+      });
+    }
+
+    makeDesktopFilesDraggable();
+    makeWindowsDraggable();
   </script>
 </body>
 </html>
