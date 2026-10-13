@@ -1,1239 +1,385 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-
 <head>
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <title>Mariana Mina</title>
-
-  <link
-    href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600&display=swap"
-    rel="stylesheet"
-  >
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#d80a0a" />
+  <title>Mariana Mina — portfólio</title>
 
   <style>
+    :root {
+      --ui: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    }
 
     * {
-      margin: 0;
-      padding: 0;
       box-sizing: border-box;
     }
 
-    html,
     body {
-      width: 100%;
-      min-height: 100%;
-    }
-
-    body {
-      font-family: "Satoshi", sans-serif;
-      color: #111;
-      overflow-x: hidden;
-      background: #111;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-
-    /* =========================
-       GIF FIXO NO FUNDO
-    ========================= */
-
-    .background {
-      position: fixed;
-      inset: 0;
-
-      width: 100vw;
-      height: 100vh;
-
+      margin: 0;
       overflow: hidden;
-
-      z-index: 0;
-
-      background: #111;
+      background: #d80a0a;
+      color: white;
+      font-family: var(--ui);
     }
 
-    .background-gif {
-      position: absolute;
-
-      top: 50%;
-      left: 50%;
-
-      width: 100vh;
-      height: 100vw;
-
-      min-width: 100vh;
-      min-height: 100vw;
-
-      object-fit: cover;
-
-      transform:
-        translate(-50%, -50%)
-        rotate(90deg);
-
-      transform-origin: center center;
-
-      pointer-events: none;
-      user-select: none;
-    }
-
-
-    /* =========================
-       MENU FIXO
-    ========================= */
-
-    .top-nav {
-      position: fixed;
-
-      top: 24px;
-      left: 32px;
-      right: 32px;
-
-      z-index: 100;
-
-      display: flex;
-      justify-content: space-between;
-
-      font-size: 11px;
-
-      line-height: 1;
-
-      font-weight: 400;
-
-      letter-spacing: 0.035em;
-
-      text-transform: uppercase;
-
-      mix-blend-mode: multiply;
-    }
-
-    .top-nav a {
-      transition: opacity 0.25s ease;
-    }
-
-    .top-nav a:hover {
-      opacity: 0.45;
-    }
-
-
-    /* =========================
-       ESPAÇO INVISÍVEL DE SCROLL
-    ========================= */
-
-    #scroll-space {
+    .desktop {
+      min-height: 100svh;
       position: relative;
+      overflow: hidden;
+      background: #d80a0a url("fundo.PNG") center / cover no-repeat;
+    }
 
-      width: 100%;
-
-      height: 400vh;
-
-      z-index: 1;
-
+    .desktop::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.035);
       pointer-events: none;
     }
 
-
-    /* =========================
-       PAPEL VEGETAL
-    ========================= */
-
-    .paper {
-      position: fixed;
-
-      top: 0;
-      left: 0;
-
-      width: 100vw;
-      height: 100vh;
-
-      z-index: 20;
-
-      background:
-        rgba(246, 243, 226, 0.13);
-
-      backdrop-filter:
-        blur(8px)
-        saturate(0.95);
-
-      -webkit-backdrop-filter:
-        blur(8px)
-        saturate(0.95);
-
-      border-top:
-        1px solid rgba(255,255,255,0.22);
-
-      overflow: hidden;
-
-      transform:
-        translate3d(0, calc(100vh - 88px), 0);
-
-      will-change: transform;
-    }
-
-
-    /* =========================
-       CONTEÚDO DENTRO DO PAPEL
-    ========================= */
-
-    .paper-content {
+    .brand {
       position: absolute;
-
-      top: 0;
-      left: 0;
-
-      width: 100%;
-
-      padding-bottom: 100px;
-
-      will-change: transform;
-    }
-
-
-    /* =========================
-       FAIXA VISÍVEL NA HOME
-    ========================= */
-
-    .paper-header {
-      height: 88px;
-
-      width: 100%;
-
-      display: flex;
-
-      flex-direction: column;
-
-      align-items: center;
-
-      justify-content: center;
-
-      gap: 5px;
-
-      padding: 10px 20px;
-
-      text-align: center;
-
-      border-bottom:
-        1px solid rgba(0,0,0,0.10);
-    }
-
-    .paper-name {
-      font-size: 20px;
-
+      z-index: 1;
+      top: clamp(18px, 3vw, 38px);
+      left: clamp(18px, 3vw, 42px);
+      margin: 0;
+      font-size: clamp(16px, 1.55vw, 23px);
       line-height: 1;
-
       font-weight: 400;
+      letter-spacing: -0.055em;
+      text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+    }
 
-      letter-spacing: -0.035em;
+    .file {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: white;
+      cursor: pointer;
+      position: absolute;
+      z-index: 1;
+      width: 136px;
+      display: grid;
+      justify-items: center;
+      gap: 8px;
+      padding: 0;
+      font: inherit;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+      transition: transform 0.18s ease;
+    }
 
+    .file:hover,
+    .file:focus-visible {
+      transform: scale(1.07);
+      outline: none;
+    }
+
+    .file .thumb {
+      width: 94px;
+      height: 70px;
+      overflow: hidden;
+      border: 2px solid rgba(255, 255, 255, 0.92);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.45);
+      background: #111;
+    }
+
+    .file video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .file span {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: -0.025em;
+    }
+
+    .project-one {
+      left: 18%;
+      top: 19%;
+    }
+
+    .folder {
+      left: 72%;
+      bottom: 14%;
+      width: 152px;
+    }
+
+    .folder img {
+      width: 120px;
+      display: block;
+      filter: drop-shadow(0 4px 5px rgba(0, 0, 0, 0.3));
+    }
+
+    .folder span {
+      font-size: 14px;
+    }
+
+    .hint {
+      position: absolute;
+      z-index: 1;
+      left: 50%;
+      bottom: 20px;
+      transform: translateX(-50%);
+      margin: 0;
+      font-size: 12px;
+      text-shadow: 0 1px 4px #000;
+      opacity: 0.9;
       white-space: nowrap;
     }
 
-    .paper-description {
-      max-width: 520px;
-
-      font-size: 10px;
-
-      line-height: 1.2;
-
-      font-weight: 400;
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 4;
+      background: rgba(0, 0, 0, 0.15);
     }
 
-    .scroll-indicator {
-      margin-top: 3px;
-
-      font-size: 8px;
-
-      line-height: 1;
-
-      text-transform: uppercase;
-
-      letter-spacing: 0.10em;
-
-      opacity: 0.55;
+    .overlay.visible {
+      display: block;
     }
 
-
-    /* =========================
-       INTRO
-    ========================= */
-
-    .intro {
-      min-height: 48vh;
-
-      padding:
-        52px 32px
-        68px;
-
-      display: grid;
-
-      grid-template-columns:
-        repeat(12, 1fr);
-
-      column-gap: 14px;
-
-      border-bottom:
-        1px solid rgba(0,0,0,0.15);
-    }
-
-    .intro-title {
-      grid-column:
-        1 / 7;
-
-      align-self: start;
-
-      font-size:
-        clamp(36px, 5.4vw, 78px);
-
-      line-height: 0.9;
-
-      font-weight: 400;
-
-      letter-spacing: -0.06em;
-    }
-
-    .intro-copy {
-      grid-column:
-        8 / 12;
-
-      align-self: end;
-
-      max-width: 430px;
-
-      font-size:
-        clamp(13px, 1.15vw, 17px);
-
-      line-height: 1.35;
-    }
-
-
-    /* =========================
-       PROJETOS
-    ========================= */
-
-    .projects {
-      padding:
-        40px 32px
-        100px;
-    }
-
-    .projects-heading {
-      display: flex;
-
-      align-items: baseline;
-      justify-content: space-between;
-
-      margin-bottom: 18px;
-    }
-
-    .projects-heading h2 {
-      font-size: 12px;
-
-      font-weight: 400;
-
-      letter-spacing: -0.01em;
-    }
-
-    .projects-heading span {
-      font-size: 9px;
-
-      text-transform: uppercase;
-
-      letter-spacing: 0.035em;
-    }
-
-    .projects-grid {
-      display: grid;
-
-      grid-template-columns:
-        repeat(4, minmax(0, 1fr));
-
-      gap: 10px;
-    }
-
-    .project {
-      position: relative;
-
-      aspect-ratio: 4 / 5;
-
+    .window {
+      display: none;
+      position: fixed;
+      z-index: 5;
+      left: 50%;
+      top: 50%;
+      width: min(800px, calc(100vw - 32px));
+      background: #f2f2f2;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
       overflow: hidden;
-
-      cursor: pointer;
-
-      background:
-        rgba(255,255,255,0.1);
+      transform: translate(-50%, -50%);
+      box-shadow: 0 22px 70px rgba(0, 0, 0, 0.62);
+      color: #111;
     }
 
-    .project-media {
-      position: absolute;
-
-      inset: 0;
-
-      width: 100%;
-      height: 100%;
-
-      transition:
-        transform 0.65s
-        cubic-bezier(.2,.8,.2,1);
+    .window.open {
+      display: block;
+      animation: open 0.18s ease-out;
     }
 
-    .project:nth-child(1) .project-media {
-      background: #ff7377;
+    @keyframes open {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -45%) scale(0.94);
+      }
+
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
     }
 
-    .project:nth-child(2) .project-media {
-      background: #1f6870;
-    }
-
-    .project:nth-child(3) .project-media {
-      background: #d48c56;
-    }
-
-    .project:nth-child(4) .project-media {
-      background: #5da871;
-    }
-
-    .project:nth-child(5) .project-media {
-      background: #ffe17a;
-    }
-
-    .project:nth-child(6) .project-media {
-      background: #315545;
-    }
-
-    .project:nth-child(7) .project-media {
-      background: #ffb267;
-    }
-
-    .project:nth-child(8) .project-media {
-      background: #7e9575;
-    }
-
-
-    /* =========================
-       HOVER PAPEL VEGETAL
-    ========================= */
-
-    .project-overlay {
-      position: absolute;
-
-      inset: 0;
-
-      padding: 14px;
-
+    .titlebar {
+      height: 42px;
       display: flex;
-
-      flex-direction: column;
-
-      justify-content: space-between;
-
-      opacity: 0;
-
-      background:
-        rgba(246, 243, 226, 0.22);
-
-      backdrop-filter:
-        blur(14px);
-
-      -webkit-backdrop-filter:
-        blur(14px);
-
-      transition:
-        opacity 0.35s ease,
-        background 0.35s ease;
-    }
-
-    .project:hover .project-overlay {
-      opacity: 1;
-
-      background:
-        rgba(246, 243, 226, 0.47);
-    }
-
-    .project:hover .project-media {
-      transform: scale(1.025);
-    }
-
-    .project-title {
-      font-size:
-        clamp(15px, 1.45vw, 22px);
-
-      line-height: 0.95;
-
-      font-weight: 400;
-
-      letter-spacing: -0.035em;
-    }
-
-    .project-meta {
-      display: flex;
-
-      justify-content: space-between;
-
+      align-items: center;
       gap: 8px;
-
-      font-size: 8px;
-
-      line-height: 1;
-
-      text-transform: uppercase;
-
-      letter-spacing: 0.035em;
+      padding: 0 14px;
+      background: linear-gradient(#f5f5f5, #dedede);
+      border-bottom: 1px solid #bababa;
     }
 
+    .dot {
+      width: 13px;
+      height: 13px;
+      padding: 0;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 0, 0, 0.16);
+      cursor: pointer;
+    }
 
-    /* =========================
-       CONTATO
-    ========================= */
+    .red {
+      background: #ff5f57;
+    }
+
+    .yellow {
+      background: #ffbd2e;
+    }
+
+    .green {
+      background: #28c840;
+    }
+
+    .title {
+      margin-left: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #3a3a3a;
+    }
+
+    .player {
+      width: 100%;
+      max-height: calc(100svh - 140px);
+      display: block;
+      background: black;
+    }
 
     .contact {
-      padding:
-        80px 32px
-        40px;
+      display: none;
+      padding: 24px;
+      background: #f7f7f7;
+      color: #111;
     }
 
-    .contact-title {
-      font-size:
-        clamp(50px, 8vw, 120px);
-
-      line-height: 0.84;
-
-      font-weight: 400;
-
-      letter-spacing: -0.065em;
-
-      margin-bottom: 80px;
+    .contact p {
+      margin: 0 0 18px;
+      font-size: 19px;
+      letter-spacing: -0.04em;
     }
 
-    .contact-bottom {
-      padding-top: 14px;
-
-      border-top:
-        1px solid rgba(0,0,0,0.16);
-
-      display: flex;
-
-      justify-content: space-between;
-
-      gap: 20px;
-
-      font-size: 9px;
-
-      text-transform: uppercase;
-
-      letter-spacing: 0.035em;
+    .contact a {
+      display: block;
+      width: max-content;
+      color: #0d53ca;
+      font-size: 17px;
+      text-decoration: none;
+      margin: 10px 0;
     }
 
-
-    /* =========================
-       TABLET
-    ========================= */
-
-    @media (max-width: 850px) {
-
-      .top-nav {
-        left: 20px;
-        right: 20px;
-        top: 20px;
-      }
-
-      .paper-header {
-        height: 95px;
-      }
-
-      .paper-name {
-        font-size: 20px;
-      }
-
-      .paper-description {
-        font-size: 9px;
-      }
-
-      .intro {
-        display: block;
-
-        padding:
-          45px 20px
-          60px;
-      }
-
-      .intro-title {
-        margin-bottom: 100px;
-      }
-
-      .intro-copy {
-        max-width: 420px;
-      }
-
-      .projects {
-        padding:
-          35px 20px
-          80px;
-      }
-
-      .projects-grid {
-        grid-template-columns:
-          repeat(2, minmax(0, 1fr));
-      }
-
-      .contact {
-        padding:
-          70px 20px
-          30px;
-      }
-
+    .contact a:hover {
+      text-decoration: underline;
     }
 
-
-    /* =========================
-       MOBILE
-    ========================= */
-
-    @media (max-width: 520px) {
-
-      .paper-header {
-        height: 105px;
-
-        padding:
-          12px 16px;
-      }
-
-      .paper-name {
-        font-size: 21px;
-      }
-
-      .paper-description {
-        max-width: 300px;
-
-        font-size: 9px;
-
-        line-height: 1.1;
-      }
-
-      .scroll-indicator {
-        font-size: 7px;
-      }
-
-      .projects-grid {
-        grid-template-columns:
-          repeat(2, minmax(0, 1fr));
-
-        gap: 6px;
-      }
-
-      .project-overlay {
-        padding: 10px;
-      }
-
-      .contact-bottom {
-        flex-direction: column;
-      }
-
+    .contact-window {
+      width: min(430px, calc(100vw - 32px));
     }
 
+    .window.full {
+      width: 100vw;
+      height: 100svh;
+      max-width: none;
+      border-radius: 0;
+    }
+
+    .window.full .titlebar {
+      height: 44px;
+    }
+
+    .window.full .player {
+      height: calc(100svh - 44px);
+      max-height: none;
+      object-fit: contain;
+    }
+
+    @media (max-width: 620px) {
+      .project-one {
+        left: 10%;
+        top: 18%;
+      }
+
+      .folder {
+        left: auto;
+        right: 5%;
+        bottom: 13%;
+      }
+
+      .hint {
+        bottom: 10px;
+        font-size: 11px;
+      }
+    }
   </style>
-
 </head>
 
-
 <body>
-
-
-  <!-- FUNDO -->
-
-  <div class="background">
-
-    <img
-      class="background-gif"
-      src="animacao.gif"
-      alt=""
-    >
-
-  </div>
-
-
-  <!-- MENU -->
-
-  <nav class="top-nav">
-
-    <a href="#" id="about-link">
-      Sobre mim
-    </a>
-
-    <a href="#" id="contact-link">
-      Contato
-    </a>
-
-  </nav>
-
-
-  <!-- PAPEL VEGETAL -->
-
-  <section
-    class="paper"
-    id="paper"
-  >
-
-    <div
-      class="paper-content"
-      id="paper-content"
-    >
-
-
-      <!-- FAIXA INICIAL -->
-
-      <header class="paper-header">
-
-        <div class="paper-name">
-          MARIANA MINA
-        </div>
-
-        <div class="paper-description">
-          Designer e diretora criativa desenvolvendo identidades,
-          imagens e experiências visuais.
-        </div>
-
-        <div class="scroll-indicator">
-          SCROLL ↓
-        </div>
-
-      </header>
-
-
-
-      <!-- SOBRE -->
-
-      <section
-        class="intro"
-        id="sobre"
-      >
-
-        <h1 class="intro-title">
-          Mariana<br>
-          Mina
-        </h1>
-
-        <p class="intro-copy">
-          Mariana desenvolve projetos de identidade,
-          direção criativa e linguagem visual a partir
-          de pesquisa, conceito e experimentação.
-        </p>
-
-      </section>
-
-
-
-      <!-- PROJETOS -->
-
-      <section class="projects">
-
-        <div class="projects-heading">
-
-          <h2>
-            Projetos selecionados
-          </h2>
-
-          <span>
-            08 projetos
-          </span>
-
-        </div>
-
-
-        <div class="projects-grid">
-
-
-          <article class="project">
-
-            <div class="project-media"></div>
-
-            <div class="project-overlay">
-
-              <h3 class="project-title">
-                Projeto Um
-              </h3>
-
-              <div class="project-meta">
-
-                <span>
-                  Identidade
-                </span>
-
-                <span>
-                  2026
-                </span>
-
-              </div>
-
-            </div>
-
-          </article>
-
-
-          <article class="project">
-
-            <div class="project-media"></div>
-
-            <div class="project-overlay">
-
-              <h3 class="project-title">
-                Projeto Dois
-              </h3>
-
-              <div class="project-meta">
-
-                <span>
-                  Branding
-                </span>
-
-                <span>
-                  2026
-                </span>
-
-              </div>
-
-            </div>
-
-          </article>
-
-
-          <article class="project">
-
-            <div class="project-media"></div>
-
-            <div class="project-overlay">
-
-              <h3 class="project-title">
-                Projeto Três
-              </h3>
-
-              <div class="project-meta">
-
-                <span>
-                  Direção Criativa
-                </span>
-
-                <span>
-                  2026
-                </span>
-
-              </div>
-
-            </div>
-
-          </article>
-
-
-          <article class="project">
-
-            <div class="project-media"></div>
-
-            <div class="project-overlay">
-
-              <h3 class="project-title">
-                Projeto Quatro
-              </h3>
-
-              <div class="project-meta">
-
-                <span>
-                  Editorial
-                </span>
-
-                <span>
-                  2025
-                </span>
-
-              </div>
-
-            </div>
-
-          </article>
-
-
-          <article class="project">
-
-            <div class="project-media"></div>
-
-            <div class="project-overlay">
-
-              <h3 class="project-title">
-                Projeto Cinco
-              </h3>
-
-              <div class="project-meta">
-
-                <span>
-                  Identidade
-                </span>
-
-                <span>
-                  2025
-                </span>
-
-              </div>
-
-            </div>
-
-          </article>
-
-
-          <article class="project">
-
-            <div class="project-media"></div>
-
-            <div class="project-overlay">
-
-              <h3 class="project-title">
-                Projeto Seis
-              </h3>
-
-              <div class="project-meta">
-
-                <span>
-                  Branding
-                </span>
-
-                <span>
-                  2025
-                </span>
-
-              </div>
-
-            </div>
-
-          </article>
-
-
-          <article class="project">
-
-            <div class="project-media"></div>
-
-            <div class="project-overlay">
-
-              <h3 class="project-title">
-                Projeto Sete
-              </h3>
-
-              <div class="project-meta">
-
-                <span>
-                  Campanha
-                </span>
-
-                <span>
-                  2025
-                </span>
-
-              </div>
-
-            </div>
-
-          </article>
-
-
-          <article class="project">
-
-            <div class="project-media"></div>
-
-            <div class="project-overlay">
-
-              <h3 class="project-title">
-                Projeto Oito
-              </h3>
-
-              <div class="project-meta">
-
-                <span>
-                  Direção
-                </span>
-
-                <span>
-                  2024
-                </span>
-
-              </div>
-
-            </div>
-
-          </article>
-
-
-        </div>
-
-      </section>
-
-
-
-      <!-- CONTATO -->
-
-      <section
-        class="contact"
-        id="contato"
-      >
-
-        <h2 class="contact-title">
-          Vamos<br>
-          conversar?
-        </h2>
-
-        <div class="contact-bottom">
-
-          <span>
-            Instagram
-          </span>
-
-          <span>
-            E-mail
-          </span>
-
-          <span>
-            © 2026 Mariana Mina
-          </span>
-
-        </div>
-
-      </section>
-
-
+  <main class="desktop">
+    <h1 class="brand">Mariana Mina</h1>
+
+    <button class="file project-one" type="button" data-open="video-window">
+      <span class="thumb">
+        <video src="video1.MP4" muted loop playsinline preload="metadata"></video>
+      </span>
+      <span>vídeo 01</span>
+    </button>
+
+    <button class="file folder" type="button" data-open="contact-window">
+      <img src="folder.PNG" alt="" />
+      <span>contato</span>
+    </button>
+
+    <p class="hint">clique nos arquivos para abrir</p>
+  </main>
+
+  <div class="overlay" id="overlay"></div>
+
+  <section class="window" id="video-window">
+    <div class="titlebar">
+      <button class="dot red" data-close aria-label="Fechar"></button>
+      <span class="dot yellow"></span>
+      <button class="dot green" data-full aria-label="Expandir vídeo"></button>
+      <span class="title">vídeo 01.MP4</span>
     </div>
 
+    <video class="player" id="main-video" src="video1.MP4" controls playsinline></video>
   </section>
 
+  <section class="window contact-window" id="contact-window">
+    <div class="titlebar">
+      <button class="dot red" data-close aria-label="Fechar"></button>
+      <span class="dot yellow"></span>
+      <span class="dot green"></span>
+      <span class="title">contato</span>
+    </div>
 
-  <div id="scroll-space"></div>
-
+    <div class="contact">
+      <p>Vamos conversar?</p>
+      <a href="mailto:email@exemplo.com">email@exemplo.com</a>
+      <a href="#">instagram</a>
+    </div>
+  </section>
 
   <script>
+    const overlay = document.querySelector("#overlay");
+    const video = document.querySelector("#main-video");
 
-    const paper =
-      document.getElementById("paper");
+    document.querySelectorAll(".thumb video").forEach((videozinho) => {
+      videozinho.play().catch(() => {});
+    });
 
-    const paperContent =
-      document.getElementById("paper-content");
+    function closeAll() {
+      document.querySelectorAll(".window").forEach((window) => {
+        window.classList.remove("open", "full");
+      });
 
-    const scrollSpace =
-      document.getElementById("scroll-space");
-
-    const aboutLink =
-      document.getElementById("about-link");
-
-    const contactLink =
-      document.getElementById("contact-link");
-
-
-    let peekHeight = 88;
-
-    let revealDistance =
-      window.innerHeight * 0.72;
-
-
-    function calculateSizes() {
-
-      if (
-        window.innerWidth <= 520
-      ) {
-
-        peekHeight = 105;
-
-      }
-
-      else if (
-        window.innerWidth <= 850
-      ) {
-
-        peekHeight = 95;
-
-      }
-
-      else {
-
-        peekHeight = 88;
-
-      }
-
-
-      revealDistance =
-        window.innerHeight * 0.72;
-
-
-      const contentHeight =
-        paperContent.scrollHeight;
-
-
-      const insideScroll =
-        Math.max(
-          0,
-          contentHeight -
-          window.innerHeight
-        );
-
-
-      const totalScroll =
-        revealDistance +
-        insideScroll +
-        120;
-
-
-      scrollSpace.style.height =
-        (
-          window.innerHeight +
-          totalScroll
-        )
-        + "px";
-
-
-      updateScene();
-
+      overlay.classList.remove("visible");
+      video.pause();
     }
 
+    document.querySelectorAll("[data-open]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const window = document.querySelector(`#${button.dataset.open}`);
 
-    function updateScene() {
+        window.classList.add("open");
+        overlay.classList.add("visible");
 
-      const y =
-        window.scrollY;
+        if (window.id === "video-window") {
+          video.currentTime = 0;
+          video.muted = false;
+          video.play().catch(() => {});
+        }
+      });
+    });
 
+    document.querySelectorAll("[data-close]").forEach((button) => {
+      button.addEventListener("click", closeAll);
+    });
 
-      const revealProgress =
-        Math.min(
-          1,
-          Math.max(
-            0,
-            y / revealDistance
-          )
-        );
+    overlay.addEventListener("click", closeAll);
 
+    document.querySelector("[data-full]").addEventListener("click", () => {
+      document.querySelector("#video-window").classList.toggle("full");
+    });
 
-      const startY =
-        window.innerHeight -
-        peekHeight;
-
-
-      const paperY =
-        startY *
-        (
-          1 -
-          revealProgress
-        );
-
-
-      paper.style.transform =
-        `translate3d(0, ${paperY}px, 0)`;
-
-
-      const contentScroll =
-        Math.max(
-          0,
-          y -
-          revealDistance
-        );
-
-
-      const maxContentScroll =
-        Math.max(
-          0,
-          paperContent.scrollHeight -
-          window.innerHeight
-        );
-
-
-      const clampedContentScroll =
-        Math.min(
-          contentScroll,
-          maxContentScroll
-        );
-
-
-      paperContent.style.transform =
-        `translate3d(
-          0,
-          ${-clampedContentScroll}px,
-          0
-        )`;
-
-    }
-
-
-    aboutLink.addEventListener(
-      "click",
-      function(event) {
-
-        event.preventDefault();
-
-        window.scrollTo({
-          top: revealDistance,
-          behavior: "smooth"
-        });
-
-      }
-    );
-
-
-    contactLink.addEventListener(
-      "click",
-      function(event) {
-
-        event.preventDefault();
-
-        const contact =
-          document.getElementById(
-            "contato"
-          );
-
-
-        const contactTop =
-          contact.offsetTop;
-
-
-        window.scrollTo({
-
-          top:
-            revealDistance +
-            contactTop -
-            80,
-
-          behavior:
-            "smooth"
-
-        });
-
-      }
-    );
-
-
-    window.addEventListener(
-      "scroll",
-      updateScene,
-      {
-        passive: true
-      }
-    );
-
-
-    window.addEventListener(
-      "resize",
-      calculateSizes
-    );
-
-
-    window.addEventListener(
-      "load",
-      calculateSizes
-    );
-
-
-    calculateSizes();
-
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeAll();
+    });
   </script>
-
-
 </body>
-
 </html>
