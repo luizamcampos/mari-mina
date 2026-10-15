@@ -3,248 +3,636 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#d80a0a" />
   <title>Mariana Mina — portfólio</title>
-  <style>
-    :root { --ui: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; }
-    * { box-sizing: border-box; }
-    body { margin:0; overflow:hidden; background:#d80a0a; color:#fff; font-family:var(--ui); }
-    .desktop { min-height:100svh; position:relative; overflow:hidden; background:#d80a0a url('fundo.PNG') center / cover no-repeat; }
-    .desktop::after { content:""; position:absolute; inset:0; background:rgba(0,0,0,.035); pointer-events:none; }
-    .brand { position:absolute; z-index:1; top:clamp(18px,3vw,38px); left:clamp(18px,3vw,42px); margin:0; font-size:clamp(16px,1.55vw,23px); line-height:1; font-weight:400; letter-spacing:-.055em; text-shadow:0 1px 5px rgba(0,0,0,.3); }
-    .desktop-item { appearance:none; border:0; background:transparent; color:#fff; cursor:grab; position:absolute; z-index:1; width:132px; display:grid; justify-items:center; gap:7px; padding:0; font:inherit; text-shadow:0 1px 4px rgba(0,0,0,.82); user-select:none; touch-action:none; }
-    .desktop-item.dragging { cursor:grabbing; z-index:3; }
-    .desktop-item:focus-visible { outline:1px solid rgba(255,255,255,.9); outline-offset:5px; border-radius:4px; }
-    .thumb { width:68px; height:51px; overflow:hidden; border:2px solid rgba(255,255,255,.92); box-shadow:0 3px 10px rgba(0,0,0,.45); background:#111; }
-    .thumb video { width:100%; height:100%; display:block; object-fit:cover; }
-    .label { font-size:12px; font-weight:500; letter-spacing:-.025em; max-width:132px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-    .folder { width:112px; }
-    .folder img { width:72px; display:block; filter:drop-shadow(0 4px 5px rgba(0,0,0,.32)); }
-    .folder .label { font-size:13px; }
-    .hint { position:absolute; z-index:1; left:50%; bottom:20px; transform:translateX(-50%); margin:0; font-size:12px; text-shadow:0 1px 4px #000; opacity:.9; white-space:nowrap; }
-    .window { display:none; position:fixed; z-index:10; left:50%; top:50%; width:min(800px,calc(100vw - 32px)); background:#f2f2f2; border:1px solid rgba(0,0,0,.2); border-radius:12px; overflow:hidden; transform:translate(-50%,-50%); box-shadow:0 22px 70px rgba(0,0,0,.62); color:#111; }
-    .window.open { display:block; animation:open .18s ease-out; }
-    @keyframes open { from { opacity:0; transform:translate(-50%,-45%) scale(.94); } to { opacity:1; transform:translate(-50%,-50%) scale(1); } }
-    .titlebar { height:42px; display:flex; align-items:center; gap:8px; padding:0 14px; background:linear-gradient(#f5f5f5,#dedede); border-bottom:1px solid #bababa; cursor:grab; }
-    .dot { width:13px; height:13px; padding:0; border-radius:50%; border:1px solid rgba(0,0,0,.16); cursor:pointer; flex:0 0 auto; }
-    .red { background:#ff5f57; } .yellow { background:#ffbd2e; } .green { background:#28c840; }
-    .title { margin-left:6px; font-size:13px; font-weight:600; color:#3a3a3a; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-    .player { width:100%; max-height:calc(100svh - 140px); display:block; background:#000; }
-    .folder-content { padding:27px 28px 30px; background:#f7f7f7; min-height:150px; }
-    .folder-content h2 { margin:0 0 8px; font-size:22px; letter-spacing:-.05em; font-weight:600; }
-    .folder-content p { margin:0; font-size:15px; line-height:1.45; color:#545454; }
-    .overlay { display:none; position:fixed; inset:0; z-index:9; background:rgba(0,0,0,.15); }
-    .overlay.visible { display:block; }
-    .window.full { width:100vw; height:100svh; max-width:none; border-radius:0; }
-    .window.full .titlebar { height:44px; }
-    .window.full .player { height:calc(100svh - 44px); max-height:none; object-fit:contain; }
 
-    @media (max-width:620px) {
-      .desktop-item { transform:scale(.88); transform-origin:top left; }
-      .hint { bottom:10px; font-size:11px; }
+  <style>
+    :root {
+      --ui: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      font-family: var(--ui);
+    }
+
+    body {
+      background: #d50d0a;
+      color: white;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .desktop {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background-image: url("fundo.PNG");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      user-select: none;
+    }
+
+    .name {
+      position: absolute;
+      top: 22px;
+      left: 26px;
+      z-index: 3;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.6px;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.32);
+    }
+
+    .help {
+      position: absolute;
+      bottom: 18px;
+      left: 50%;
+      z-index: 3;
+      transform: translateX(-50%);
+      font-size: 12px;
+      font-weight: 700;
+      text-align: center;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+      pointer-events: none;
+    }
+
+    .desktop-item {
+      position: absolute;
+      z-index: 4;
+      width: 110px;
+      cursor: grab;
+      touch-action: none;
+      text-align: center;
+    }
+
+    .desktop-item.dragging {
+      cursor: grabbing;
+      z-index: 30;
+    }
+
+    .file {
+      appearance: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      border: 0;
+      padding: 0;
+      background: transparent;
+      color: white;
+      cursor: inherit;
+    }
+
+    .thumb {
+      width: 78px;
+      height: 58px;
+      overflow: hidden;
+      border: 3px solid rgba(255, 255, 255, 0.94);
+      background: #212121;
+      box-shadow: 0 3px 9px rgba(0, 0, 0, 0.38);
+    }
+
+    .thumb video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+
+    .file-name {
+      display: block;
+      width: 130px;
+      margin-top: 7px;
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.05;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.52);
+      overflow-wrap: anywhere;
+    }
+
+    .folder {
+      appearance: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      border: 0;
+      padding: 0;
+      background: transparent;
+      color: white;
+      cursor: inherit;
+    }
+
+    .folder img {
+      width: 88px;
+      height: auto;
+      pointer-events: none;
+      filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.24));
+    }
+
+    .folder span {
+      display: block;
+      width: 130px;
+      margin-top: 5px;
+      font-size: 12px;
+      font-weight: 700;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    .window {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 100;
+      display: none;
+      width: min(780px, 88vw);
+      transform: translate(-50%, -50%);
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.25);
+      border-radius: 15px;
+      background: #121212;
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.6);
+    }
+
+    .window.open {
+      display: block;
+    }
+
+    .titlebar {
+      display: flex;
+      align-items: center;
+      height: 46px;
+      padding: 0 16px;
+      background: linear-gradient(#f9f9f9, #e7e7e7);
+      color: #4c4c4c;
+    }
+
+    .traffic {
+      display: flex;
+      gap: 9px;
+    }
+
+    .dot {
+      width: 14px;
+      height: 14px;
+      border: 0;
+      border-radius: 50%;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .dot.red {
+      background: #ff5f57;
+    }
+
+    .dot.yellow {
+      background: #ffbd2e;
+    }
+
+    .dot.green {
+      background: #28c840;
+    }
+
+    .window-title {
+      flex: 1;
+      padding: 0 18px;
+      overflow: hidden;
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .window-body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 280px;
+      background: #111;
+    }
+
+    .window video {
+      display: block;
+      width: 100%;
+      max-height: calc(100vh - 160px);
+      background: #111;
+    }
+
+    .info-window {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 110;
+      display: none;
+      width: min(620px, 88vw);
+      transform: translate(-50%, -50%);
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.25);
+      border-radius: 15px;
+      background: #f5f5f7;
+      color: #111;
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.6);
+    }
+
+    .info-window.open {
+      display: block;
+    }
+
+    .info-content {
+      max-height: min(65vh, 560px);
+      overflow: auto;
+      padding: 30px;
+      color: white;
+      background: #1333ea;
+      font-size: clamp(22px, 3vw, 43px);
+      font-weight: 300;
+      line-height: 1.14;
+      letter-spacing: -1.6px;
+    }
+
+    .info-content.small {
+      font-size: 20px;
+      line-height: 1.35;
+      letter-spacing: -0.4px;
+    }
+
+    .info-content a {
+      color: white;
+    }
+
+    @media (max-width: 650px) {
+      .desktop-item {
+        width: 92px;
+      }
+
+      .thumb {
+        width: 66px;
+        height: 50px;
+      }
+
+      .folder img {
+        width: 70px;
+      }
+
+      .file-name,
+      .folder span {
+        font-size: 10px;
+      }
+
+      .name {
+        top: 14px;
+        left: 16px;
+      }
+
+      .help {
+        bottom: 10px;
+        font-size: 10px;
+      }
     }
   </style>
 </head>
 
 <body>
   <main class="desktop" id="desktop">
-    <h1 class="brand">Mariana Mina</h1>
+    <div class="name">Mariana Mina</div>
+    <div class="help">arraste os arquivos ou clique para abrir</div>
 
-    <button class="desktop-item video-file" style="left:11%;top:18%" type="button" data-video="video1.MP4">
-      <span class="thumb"><video src="video1.MP4" muted loop playsinline preload="metadata"></video></span>
-      <span class="label">vídeo 01</span>
-    </button>
+    <div class="desktop-item" style="left: 11%; top: 18%;">
+      <button class="file" data-video="video1.MP4" data-title="CRICRI-ONLINE-V3.mp4">
+        <span class="thumb">
+          <video src="video1.MP4" muted playsinline preload="metadata"></video>
+        </span>
+        <span class="file-name">CRICRI-ONLINE-V3.mp4</span>
+      </button>
+    </div>
 
-    <button class="desktop-item video-file" style="left:36%;top:15%" type="button" data-video="video2.MP4">
-      <span class="thumb"><video src="video2.MP4" muted loop playsinline preload="metadata"></video></span>
-      <span class="label">vídeo 02</span>
-    </button>
+    <div class="desktop-item" style="left: 36%; top: 15%;">
+      <button class="file" data-video="video2.MP4" data-title="video02.MP4">
+        <span class="thumb">
+          <video src="video2.MP4" muted playsinline preload="metadata"></video>
+        </span>
+        <span class="file-name">video02.MP4</span>
+      </button>
+    </div>
 
-    <button class="desktop-item video-file" style="left:63%;top:22%" type="button" data-video="video3.MP4">
-      <span class="thumb"><video src="video3.MP4" muted loop playsinline preload="metadata"></video></span>
-      <span class="label">vídeo 03</span>
-    </button>
+    <div class="desktop-item" style="left: 63%; top: 22%;">
+      <button class="file" data-video="video3.MP4" data-title="video03.MP4">
+        <span class="thumb">
+          <video src="video3.MP4" muted playsinline preload="metadata"></video>
+        </span>
+        <span class="file-name">video03.MP4</span>
+      </button>
+    </div>
 
-    <button class="desktop-item video-file" style="left:20%;top:52%" type="button" data-video="video4.MP4">
-      <span class="thumb"><video src="video4.MP4" muted loop playsinline preload="metadata"></video></span>
-      <span class="label">vídeo 04</span>
-    </button>
+    <div class="desktop-item" style="left: 20%; top: 52%;">
+      <button class="file" data-video="video4.MP4" data-title="video04.MP4">
+        <span class="thumb">
+          <video src="video4.MP4" muted playsinline preload="metadata"></video>
+        </span>
+        <span class="file-name">video04.MP4</span>
+      </button>
+    </div>
 
-    <button class="desktop-item video-file" style="left:49%;top:48%" type="button" data-video="video5.MP4">
-      <span class="thumb"><video src="video5.MP4" muted loop playsinline preload="metadata"></video></span>
-      <span class="label">vídeo 05</span>
-    </button>
+    <div class="desktop-item" style="left: 49%; top: 48%;">
+      <button class="file" data-video="video5.MP4" data-title="video05.MP4">
+        <span class="thumb">
+          <video src="video5.MP4" muted playsinline preload="metadata"></video>
+        </span>
+        <span class="file-name">video05.MP4</span>
+      </button>
+    </div>
 
-    <button class="desktop-item video-file" style="left:78%;top:50%" type="button" data-video="video6.MP4">
-      <span class="thumb"><video src="video6.MP4" muted loop playsinline preload="metadata"></video></span>
-      <span class="label">vídeo 06</span>
-    </button>
+    <div class="desktop-item" style="left: 78%; top: 50%;">
+      <button class="file" data-video="video6.MP4" data-title="video06.MP4">
+        <span class="thumb">
+          <video src="video6.MP4" muted playsinline preload="metadata"></video>
+        </span>
+        <span class="file-name">video06.MP4</span>
+      </button>
+    </div>
 
-    <button class="desktop-item video-file" style="left:40%;top:72%" type="button" data-video="video7.MP4">
-      <span class="thumb"><video src="video7.MP4" muted loop playsinline preload="metadata"></video></span>
-      <span class="label">vídeo 07</span>
-    </button>
+    <div class="desktop-item" style="left: 40%; top: 72%;">
+      <button class="file" data-video="video7.MP4" data-title="video07.MP4">
+        <span class="thumb">
+          <video src="video7.MP4" muted playsinline preload="metadata"></video>
+        </span>
+        <span class="file-name">video07.MP4</span>
+      </button>
+    </div>
 
-    <button class="desktop-item folder" style="left:69%;top:70%" type="button" data-open="about-window">
-      <img src="folder.PNG" alt="" />
-      <span class="label">sobre mim</span>
-    </button>
+    <div class="desktop-item" style="left: 69%; top: 70%;">
+      <button class="folder" data-info="about">
+        <img src="folder.PNG" alt="" draggable="false" />
+        <span>sobre mim</span>
+      </button>
+    </div>
 
-    <button class="desktop-item folder" style="left:8%;top:72%" type="button" data-open="resume-window">
-      <img src="folder.PNG" alt="" />
-      <span class="label">currículo</span>
-    </button>
+    <div class="desktop-item" style="left: 8%; top: 72%;">
+      <button class="folder" data-info="resume">
+        <img src="folder.PNG" alt="" draggable="false" />
+        <span>currículo</span>
+      </button>
+    </div>
 
-    <button class="desktop-item folder" style="left:82%;top:76%" type="button" data-open="contact-window">
-      <img src="folder.PNG" alt="" />
-      <span class="label">contato</span>
-    </button>
-
-    <p class="hint">arraste os arquivos ou clique para abrir</p>
+    <div class="desktop-item" style="left: 82%; top: 76%;">
+      <button class="folder" data-info="contact">
+        <img src="folder.PNG" alt="" draggable="false" />
+        <span>contato</span>
+      </button>
+    </div>
   </main>
 
-  <div class="overlay" id="overlay"></div>
-
-  <section class="window" id="video-window">
+  <section class="window" id="videoWindow" aria-hidden="true">
     <div class="titlebar">
-      <button class="dot red" data-close></button>
-      <span class="dot yellow"></span>
-      <button class="dot green" data-full></button>
-      <span class="title" id="video-title"></span>
+      <div class="traffic">
+        <button class="dot red" id="closeVideo" aria-label="Fechar"></button>
+        <button class="dot yellow" id="minimizeVideo" aria-label="Minimizar"></button>
+        <button class="dot green" id="fullScreenVideo" aria-label="Tela cheia"></button>
+      </div>
+      <div class="window-title" id="videoTitle">vídeo</div>
     </div>
-    <video class="player" id="main-video" controls playsinline></video>
-  </section>
-
-  <section class="window" id="about-window">
-    <div class="titlebar">
-      <button class="dot red" data-close></button>
-      <span class="dot yellow"></span>
-      <span class="dot green"></span>
-      <span class="title">sobre mim</span>
-    </div>
-    <div class="folder-content">
-      <h2>Mariana Mina</h2>
-      <p>Texto sobre a Mariana entra aqui.</p>
+    <div class="window-body">
+      <video id="mainVideo" controls playsinline></video>
     </div>
   </section>
 
-  <section class="window" id="resume-window">
+  <section class="info-window" id="infoWindow" aria-hidden="true">
     <div class="titlebar">
-      <button class="dot red" data-close></button>
-      <span class="dot yellow"></span>
-      <span class="dot green"></span>
-      <span class="title">currículo</span>
+      <div class="traffic">
+        <button class="dot red" id="closeInfo" aria-label="Fechar"></button>
+        <button class="dot yellow" id="minimizeInfo" aria-label="Minimizar"></button>
+        <button class="dot green" id="maximizeInfo" aria-label="Ampliar"></button>
+      </div>
+      <div class="window-title" id="infoTitle">pasta</div>
     </div>
-    <div class="folder-content">
-      <h2>Currículo</h2>
-      <p>Depois, podemos colocar aqui o PDF do currículo para abrir ou baixar.</p>
-    </div>
-  </section>
-
-  <section class="window" id="contact-window">
-    <div class="titlebar">
-      <button class="dot red" data-close></button>
-      <span class="dot yellow"></span>
-      <span class="dot green"></span>
-      <span class="title">contato</span>
-    </div>
-    <div class="folder-content">
-      <h2>Vamos conversar?</h2>
-      <p>Coloque aqui o e-mail e os contatos da Mariana.</p>
-    </div>
+    <div class="info-content" id="infoContent"></div>
   </section>
 
   <script>
-    const desktop = document.querySelector('#desktop');
-    const overlay = document.querySelector('#overlay');
-    const mainVideo = document.querySelector('#main-video');
-    const videoWindow = document.querySelector('#video-window');
-    const videoTitle = document.querySelector('#video-title');
+    const desktop = document.getElementById("desktop");
+    const videoWindow = document.getElementById("videoWindow");
+    const mainVideo = document.getElementById("mainVideo");
+    const videoTitle = document.getElementById("videoTitle");
 
-    document.querySelectorAll('.thumb video').forEach(v => v.play().catch(() => {}));
+    const infoWindow = document.getElementById("infoWindow");
+    const infoTitle = document.getElementById("infoTitle");
+    const infoContent = document.getElementById("infoContent");
 
-    function closeAll() {
-      document.querySelectorAll('.window').forEach(w => w.classList.remove('open', 'full'));
-      overlay.classList.remove('visible');
+    const folderContent = {
+      about: {
+        title: "sobre mim",
+        text: `
+          <div>
+            Mariana Mina é artista e criadora.
+            <br><br>
+            Aqui você pode escrever um texto maior sobre ela, sua pesquisa,
+            trabalhos, referências e tudo que quiser apresentar.
+          </div>
+        `,
+        small: false
+      },
+
+      resume: {
+        title: "currículo",
+        text: `
+          <div>
+            <strong>Mariana Mina</strong><br><br>
+            Direção criativa / audiovisual / arte.<br><br>
+            Adicione aqui formação, exposições, projetos, clientes
+            e experiências profissionais.
+          </div>
+        `,
+        small: true
+      },
+
+      contact: {
+        title: "contato",
+        text: `
+          <div>
+            <strong>contato</strong><br><br>
+            email@exemplo.com<br>
+            instagram.com/seuinstagram
+          </div>
+        `,
+        small: true
+      }
+    };
+
+    function openVideo(source, title) {
       mainVideo.pause();
+      mainVideo.src = source;
+      mainVideo.load();
+
+      videoTitle.textContent = title;
+      videoWindow.classList.add("open");
+      videoWindow.setAttribute("aria-hidden", "false");
+
+      mainVideo.play().catch(() => {
+        /* o botão play aparecerá caso o navegador bloqueie */
+      });
     }
 
-    function openWindow(id) {
-      document.querySelector('#' + id).classList.add('open');
-      overlay.classList.add('visible');
+    function closeVideo() {
+      mainVideo.pause();
+      mainVideo.removeAttribute("src");
+      mainVideo.load();
+      videoWindow.classList.remove("open");
+      videoWindow.setAttribute("aria-hidden", "true");
     }
 
-    document.querySelectorAll('[data-open]').forEach(item => {
-      item.addEventListener('click', () => {
-        if (!item.dataset.dragged) openWindow(item.dataset.open);
+    function openInfo(type) {
+      const data = folderContent[type];
+
+      infoTitle.textContent = data.title;
+      infoContent.innerHTML = data.text;
+      infoContent.classList.toggle("small", data.small);
+
+      infoWindow.classList.add("open");
+      infoWindow.setAttribute("aria-hidden", "false");
+    }
+
+    function closeInfo() {
+      infoWindow.classList.remove("open");
+      infoWindow.setAttribute("aria-hidden", "true");
+    }
+
+    document.querySelectorAll(".file").forEach((file) => {
+      file.addEventListener("click", () => {
+        if (file.closest(".desktop-item").dataset.dragged === "true") return;
+
+        openVideo(file.dataset.video, file.dataset.title);
       });
     });
 
-    document.querySelectorAll('.video-file').forEach(item => {
-      item.addEventListener('click', () => {
-        if (item.dataset.dragged) return;
+    document.querySelectorAll(".folder").forEach((folder) => {
+      folder.addEventListener("click", () => {
+        if (folder.closest(".desktop-item").dataset.dragged === "true") return;
 
-        mainVideo.src = item.dataset.video;
-        videoTitle.textContent = item.dataset.video;
-        openWindow('video-window');
-        mainVideo.currentTime = 0;
-        mainVideo.muted = false;
-        mainVideo.play().catch(() => {});
+        openInfo(folder.dataset.info);
       });
     });
 
-    document.querySelectorAll('[data-close]').forEach(btn => btn.addEventListener('click', closeAll));
-    overlay.addEventListener('click', closeAll);
-    document.querySelector('[data-full]').addEventListener('click', () => videoWindow.classList.toggle('full'));
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAll(); });
+    document.getElementById("closeVideo").addEventListener("click", closeVideo);
+    document.getElementById("minimizeVideo").addEventListener("click", () => {
+      videoWindow.classList.remove("open");
+    });
 
-    document.querySelectorAll('.desktop-item').forEach(item => {
-      let startX, startY, originX, originY, moved;
+    document.getElementById("fullScreenVideo").addEventListener("click", () => {
+      if (mainVideo.requestFullscreen) {
+        mainVideo.requestFullscreen();
+      } else if (mainVideo.webkitEnterFullscreen) {
+        mainVideo.webkitEnterFullscreen();
+      }
+    });
 
-      item.addEventListener('pointerdown', e => {
-        if (e.button !== undefined && e.button !== 0) return;
+    document.getElementById("closeInfo").addEventListener("click", closeInfo);
+    document.getElementById("minimizeInfo").addEventListener("click", () => {
+      infoWindow.classList.remove("open");
+    });
 
-        const box = item.getBoundingClientRect();
-        const desk = desktop.getBoundingClientRect();
+    document.getElementById("maximizeInfo").addEventListener("click", () => {
+      infoWindow.classList.toggle("fullscreen-info");
+      if (infoWindow.classList.contains("fullscreen-info")) {
+        infoWindow.style.width = "94vw";
+      } else {
+        infoWindow.style.width = "";
+      }
+    });
 
-        startX = e.clientX;
-        startY = e.clientY;
-        originX = box.left - desk.left;
-        originY = box.top - desk.top;
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeVideo();
+        closeInfo();
+      }
+    });
+
+    /* Capas sempre paradas */
+    document.querySelectorAll(".thumb video").forEach((capa) => {
+      capa.pause();
+
+      capa.addEventListener("loadeddata", () => {
+        capa.currentTime = 0;
+        capa.pause();
+      });
+
+      capa.addEventListener("play", () => {
+        capa.pause();
+        capa.currentTime = 0;
+      });
+    });
+
+    /* Arrastar arquivos e pastas */
+    document.querySelectorAll(".desktop-item").forEach((item) => {
+      let offsetX = 0;
+      let offsetY = 0;
+      let moved = false;
+
+      item.addEventListener("pointerdown", (event) => {
+        if (event.button !== undefined && event.button !== 0) return;
+
+        event.preventDefault();
+
+        const rect = item.getBoundingClientRect();
+        offsetX = event.clientX - rect.left;
+        offsetY = event.clientY - rect.top;
         moved = false;
 
-        item.setPointerCapture(e.pointerId);
-        item.classList.add('dragging');
+        item.classList.add("dragging");
+        item.setPointerCapture(event.pointerId);
       });
 
-      item.addEventListener('pointermove', e => {
-        if (!item.hasPointerCapture(e.pointerId)) return;
+      item.addEventListener("pointermove", (event) => {
+        if (!item.classList.contains("dragging")) return;
 
-        const dx = e.clientX - startX;
-        const dy = e.clientY - startY;
+        const desktopRect = desktop.getBoundingClientRect();
 
-        if (Math.abs(dx) + Math.abs(dy) > 5) moved = true;
+        let x = event.clientX - desktopRect.left - offsetX;
+        let y = event.clientY - desktopRect.top - offsetY;
 
-        const maxX = desktop.clientWidth - item.offsetWidth;
-        const maxY = desktop.clientHeight - item.offsetHeight;
+        x = Math.max(0, Math.min(x, desktopRect.width - item.offsetWidth));
+        y = Math.max(0, Math.min(y, desktopRect.height - item.offsetHeight));
 
-        item.style.left = Math.max(0, Math.min(maxX, originX + dx)) + 'px';
-        item.style.top = Math.max(0, Math.min(maxY, originY + dy)) + 'px';
-        item.style.right = 'auto';
-        item.style.bottom = 'auto';
+        item.style.left = `${x}px`;
+        item.style.top = `${y}px`;
+
+        moved = true;
       });
 
-      item.addEventListener('pointerup', e => {
-        item.releasePointerCapture?.(e.pointerId);
-        item.classList.remove('dragging');
-        item.dataset.dragged = moved ? '1' : '';
-        setTimeout(() => item.dataset.dragged = '', 0);
-      });
+      function finishDrag(event) {
+        if (!item.classList.contains("dragging")) return;
 
-      item.addEventListener('pointercancel', e => {
-        item.releasePointerCapture?.(e.pointerId);
-        item.classList.remove('dragging');
-      });
+        item.classList.remove("dragging");
+
+        if (item.hasPointerCapture(event.pointerId)) {
+          item.releasePointerCapture(event.pointerId);
+        }
+
+        if (moved) {
+          item.dataset.dragged = "true";
+
+          setTimeout(() => {
+            item.dataset.dragged = "false";
+          }, 100);
+        }
+      }
+
+      item.addEventListener("pointerup", finishDrag);
+      item.addEventListener("pointercancel", finishDrag);
     });
   </script>
 </body>
