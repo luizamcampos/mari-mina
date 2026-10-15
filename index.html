@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mariana Mina — portfólio</>
+  <title>Mariana Mina — portfólio</title>
 
   <style>
     * { box-sizing: border-box; }
@@ -21,9 +21,7 @@
       color: white;
     }
 
-    button {
-      font: inherit;
-    }
+    button { font: inherit; }
 
     .desktop {
       position: relative;
@@ -256,7 +254,6 @@
         display: none;
       }
 
-      /* Posições iguais ao seu print no celular */
       .item-1 { left: 0% !important; top: 22% !important; }
       .item-2 { left: 52% !important; top: 15% !important; }
       .item-contact { left: 75% !important; top: 20% !important; }
@@ -488,8 +485,7 @@
     });
 
     document.getElementById("maximizeInfo").addEventListener("click", () => {
-      infoWindow.style.width =
-        infoWindow.style.width === "94vw" ? "" : "94vw";
+      infoWindow.style.width = infoWindow.style.width === "94vw" ? "" : "94vw";
     });
 
     document.addEventListener("keydown", (event) => {
@@ -499,12 +495,11 @@
       }
     });
 
-    /* Cria uma capa parada usando um frame do próprio vídeo */
+    /* Cria uma capa parada com um frame do próprio vídeo */
     document.querySelectorAll("canvas[data-cover]").forEach((canvas) => {
-      const source = canvas.dataset.cover;
       const video = document.createElement("video");
 
-      video.src = source;
+      video.src = canvas.dataset.cover;
       video.muted = true;
       video.preload = "auto";
       video.playsInline = true;
@@ -515,6 +510,7 @@
 
       video.addEventListener("seeked", () => {
         const context = canvas.getContext("2d");
+
         canvas.width = 240;
         canvas.height = 180;
 
@@ -547,8 +543,6 @@
         );
 
         video.pause();
-        video.removeAttribute("src");
-        video.load();
       });
     });
 
