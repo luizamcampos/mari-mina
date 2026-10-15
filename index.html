@@ -1,30 +1,23 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mariana Mina — portfólio</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mariana Mina — portfólio</>
 
   <style>
-    :root {
-      --ui: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
-    }
+    * { box-sizing: border-box; }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html,
-    body {
+    html, body {
       width: 100%;
       height: 100%;
       margin: 0;
       overflow: hidden;
-      font-family: var(--ui);
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
     }
 
     body {
-      background: #d50d0a;
+      background: #d70c09;
       color: white;
     }
 
@@ -37,138 +30,120 @@
       width: 100vw;
       height: 100vh;
       overflow: hidden;
-      background-image: url("fundo.PNG");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
       user-select: none;
+      background: #d70c09 url("fundo.PNG") center center / cover no-repeat;
     }
 
     .name {
       position: absolute;
       top: 22px;
       left: 26px;
-      z-index: 3;
+      z-index: 5;
       font-size: 15px;
       font-weight: 700;
       letter-spacing: -0.6px;
-      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.32);
+      text-shadow: 0 1px 4px rgba(0,0,0,.35);
     }
 
     .help {
       position: absolute;
       bottom: 18px;
       left: 50%;
-      z-index: 3;
+      z-index: 5;
       transform: translateX(-50%);
+      width: 100%;
       font-size: 12px;
       font-weight: 700;
       text-align: center;
-      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+      text-shadow: 0 1px 4px rgba(0,0,0,.5);
       pointer-events: none;
     }
 
     .desktop-item {
       position: absolute;
       z-index: 4;
-      width: 110px;
+      width: 118px;
+      text-align: center;
       cursor: grab;
       touch-action: none;
-      text-align: center;
     }
 
     .desktop-item.dragging {
+      z-index: 40;
       cursor: grabbing;
-      z-index: 30;
     }
 
-    .file {
-      appearance: none;
+    .file,
+    .folder {
       display: flex;
       flex-direction: column;
       align-items: center;
       width: 100%;
-      border: 0;
       padding: 0;
-      background: transparent;
+      border: 0;
       color: white;
+      background: transparent;
       cursor: inherit;
     }
 
     .thumb {
+      display: block;
       width: 78px;
       height: 58px;
       overflow: hidden;
-      border: 3px solid rgba(255, 255, 255, 0.94);
-      background: #212121;
-      box-shadow: 0 3px 9px rgba(0, 0, 0, 0.38);
+      border: 3px solid rgba(255,255,255,.95);
+      background: #252525;
+      box-shadow: 0 3px 9px rgba(0,0,0,.38);
     }
 
-    .thumb video {
+    .thumb canvas {
       display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      pointer-events: none;
     }
 
-    .file-name {
+    .file-name,
+    .folder span {
       display: block;
-      width: 130px;
+      width: 140px;
       margin-top: 7px;
-      color: white;
       font-size: 12px;
       font-weight: 700;
       line-height: 1.05;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.52);
+      text-shadow: 0 1px 3px rgba(0,0,0,.55);
       overflow-wrap: anywhere;
-    }
-
-    .folder {
-      appearance: none;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      border: 0;
-      padding: 0;
-      background: transparent;
-      color: white;
-      cursor: inherit;
     }
 
     .folder img {
       width: 88px;
       height: auto;
       pointer-events: none;
-      filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.24));
+      filter: drop-shadow(0 3px 5px rgba(0,0,0,.25));
     }
 
     .folder span {
-      display: block;
-      width: 130px;
       margin-top: 5px;
-      font-size: 12px;
-      font-weight: 700;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
     }
 
-    .window {
+    .window,
+    .info-window {
       position: absolute;
       top: 50%;
       left: 50%;
       z-index: 100;
       display: none;
-      width: min(780px, 88vw);
+      width: min(780px, 90vw);
       transform: translate(-50%, -50%);
       overflow: hidden;
-      border: 1px solid rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(0,0,0,.25);
       border-radius: 15px;
-      background: #121212;
-      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.6);
+      background: #111;
+      box-shadow: 0 22px 60px rgba(0,0,0,.6);
     }
 
-    .window.open {
+    .window.open,
+    .info-window.open {
       display: block;
     }
 
@@ -177,8 +152,8 @@
       align-items: center;
       height: 46px;
       padding: 0 16px;
-      background: linear-gradient(#f9f9f9, #e7e7e7);
-      color: #4c4c4c;
+      background: linear-gradient(#fafafa, #e5e5e5);
+      color: #444;
     }
 
     .traffic {
@@ -189,23 +164,15 @@
     .dot {
       width: 14px;
       height: 14px;
+      padding: 0;
       border: 0;
       border-radius: 50%;
-      padding: 0;
       cursor: pointer;
     }
 
-    .dot.red {
-      background: #ff5f57;
-    }
-
-    .dot.yellow {
-      background: #ffbd2e;
-    }
-
-    .dot.green {
-      background: #28c840;
-    }
+    .red { background: #ff5f57; }
+    .yellow { background: #ffbd2e; }
+    .green { background: #28c840; }
 
     .window-title {
       flex: 1;
@@ -222,35 +189,19 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 280px;
+      min-height: 250px;
       background: #111;
     }
 
-    .window video {
+    #mainVideo {
       display: block;
       width: 100%;
-      max-height: calc(100vh - 160px);
+      max-height: calc(100vh - 130px);
       background: #111;
     }
 
     .info-window {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      z-index: 110;
-      display: none;
-      width: min(620px, 88vw);
-      transform: translate(-50%, -50%);
-      overflow: hidden;
-      border: 1px solid rgba(0, 0, 0, 0.25);
-      border-radius: 15px;
-      background: #f5f5f7;
-      color: #111;
-      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.6);
-    }
-
-    .info-window.open {
-      display: block;
+      background: #1333ea;
     }
 
     .info-content {
@@ -258,11 +209,10 @@
       overflow: auto;
       padding: 30px;
       color: white;
-      background: #1333ea;
-      font-size: clamp(22px, 3vw, 43px);
+      font-size: clamp(23px, 3vw, 42px);
       font-weight: 300;
       line-height: 1.14;
-      letter-spacing: -1.6px;
+      letter-spacing: -1.5px;
     }
 
     .info-content.small {
@@ -271,37 +221,65 @@
       letter-spacing: -0.4px;
     }
 
-    .info-content a {
-      color: white;
-    }
-
     @media (max-width: 650px) {
+      .desktop {
+        background-size: auto 100%;
+        background-position: center bottom;
+      }
+
+      .name {
+        top: 23px;
+        left: 27px;
+        font-size: 15px;
+      }
+
       .desktop-item {
-        width: 92px;
+        width: 105px;
       }
 
       .thumb {
-        width: 66px;
-        height: 50px;
+        width: 76px;
+        height: 84px;
       }
 
       .folder img {
-        width: 70px;
+        width: 116px;
       }
 
       .file-name,
       .folder span {
-        font-size: 10px;
-      }
-
-      .name {
-        top: 14px;
-        left: 16px;
+        width: 135px;
+        font-size: 12px;
       }
 
       .help {
-        bottom: 10px;
-        font-size: 10px;
+        display: none;
+      }
+
+      /* Posições iguais ao seu print no celular */
+      .item-1 { left: 0% !important; top: 22% !important; }
+      .item-2 { left: 52% !important; top: 15% !important; }
+      .item-contact { left: 75% !important; top: 20% !important; }
+
+      .item-about { left: 31% !important; top: 38% !important; }
+      .item-3 { left: 64% !important; top: 38% !important; }
+
+      .item-4 { left: 1% !important; top: 55% !important; }
+      .item-5 { left: 51% !important; top: 50% !important; }
+
+      .item-resume { left: 0% !important; top: 70% !important; }
+      .item-6 { left: 75% !important; top: 67% !important; }
+      .item-7 { left: 20% !important; top: 87% !important; }
+
+      .window,
+      .info-window {
+        width: 94vw;
+        border-radius: 13px;
+      }
+
+      .info-content {
+        padding: 23px;
+        font-size: 28px;
       }
     }
   </style>
@@ -312,114 +290,102 @@
     <div class="name">Mariana Mina</div>
     <div class="help">arraste os arquivos ou clique para abrir</div>
 
-    <div class="desktop-item" style="left: 11%; top: 18%;">
+    <div class="desktop-item item-1" style="left: 11%; top: 18%;">
       <button class="file" data-video="video1.MP4" data-title="CRICRI-ONLINE-V3.mp4">
-        <span class="thumb">
-          <video src="video1.MP4" muted playsinline preload="metadata"></video>
-        </span>
+        <span class="thumb"><canvas data-cover="video1.MP4"></canvas></span>
         <span class="file-name">CRICRI-ONLINE-V3.mp4</span>
       </button>
     </div>
 
-    <div class="desktop-item" style="left: 36%; top: 15%;">
+    <div class="desktop-item item-2" style="left: 36%; top: 15%;">
       <button class="file" data-video="video2.MP4" data-title="video02.MP4">
-        <span class="thumb">
-          <video src="video2.MP4" muted playsinline preload="metadata"></video>
-        </span>
+        <span class="thumb"><canvas data-cover="video2.MP4"></canvas></span>
         <span class="file-name">video02.MP4</span>
       </button>
     </div>
 
-    <div class="desktop-item" style="left: 63%; top: 22%;">
+    <div class="desktop-item item-3" style="left: 63%; top: 22%;">
       <button class="file" data-video="video3.MP4" data-title="video03.MP4">
-        <span class="thumb">
-          <video src="video3.MP4" muted playsinline preload="metadata"></video>
-        </span>
+        <span class="thumb"><canvas data-cover="video3.MP4"></canvas></span>
         <span class="file-name">video03.MP4</span>
       </button>
     </div>
 
-    <div class="desktop-item" style="left: 20%; top: 52%;">
+    <div class="desktop-item item-4" style="left: 20%; top: 52%;">
       <button class="file" data-video="video4.MP4" data-title="video04.MP4">
-        <span class="thumb">
-          <video src="video4.MP4" muted playsinline preload="metadata"></video>
-        </span>
+        <span class="thumb"><canvas data-cover="video4.MP4"></canvas></span>
         <span class="file-name">video04.MP4</span>
       </button>
     </div>
 
-    <div class="desktop-item" style="left: 49%; top: 48%;">
+    <div class="desktop-item item-5" style="left: 49%; top: 48%;">
       <button class="file" data-video="video5.MP4" data-title="video05.MP4">
-        <span class="thumb">
-          <video src="video5.MP4" muted playsinline preload="metadata"></video>
-        </span>
+        <span class="thumb"><canvas data-cover="video5.MP4"></canvas></span>
         <span class="file-name">video05.MP4</span>
       </button>
     </div>
 
-    <div class="desktop-item" style="left: 78%; top: 50%;">
+    <div class="desktop-item item-6" style="left: 78%; top: 50%;">
       <button class="file" data-video="video6.MP4" data-title="video06.MP4">
-        <span class="thumb">
-          <video src="video6.MP4" muted playsinline preload="metadata"></video>
-        </span>
+        <span class="thumb"><canvas data-cover="video6.MP4"></canvas></span>
         <span class="file-name">video06.MP4</span>
       </button>
     </div>
 
-    <div class="desktop-item" style="left: 40%; top: 72%;">
+    <div class="desktop-item item-7" style="left: 40%; top: 72%;">
       <button class="file" data-video="video7.MP4" data-title="video07.MP4">
-        <span class="thumb">
-          <video src="video7.MP4" muted playsinline preload="metadata"></video>
-        </span>
+        <span class="thumb"><canvas data-cover="video7.MP4"></canvas></span>
         <span class="file-name">video07.MP4</span>
       </button>
     </div>
 
-    <div class="desktop-item" style="left: 69%; top: 70%;">
+    <div class="desktop-item item-about" style="left: 69%; top: 70%;">
       <button class="folder" data-info="about">
-        <img src="folder.PNG" alt="" draggable="false" />
+        <img src="folder.PNG" alt="" draggable="false">
         <span>sobre mim</span>
       </button>
     </div>
 
-    <div class="desktop-item" style="left: 8%; top: 72%;">
+    <div class="desktop-item item-resume" style="left: 8%; top: 72%;">
       <button class="folder" data-info="resume">
-        <img src="folder.PNG" alt="" draggable="false" />
+        <img src="folder.PNG" alt="" draggable="false">
         <span>currículo</span>
       </button>
     </div>
 
-    <div class="desktop-item" style="left: 82%; top: 76%;">
+    <div class="desktop-item item-contact" style="left: 82%; top: 76%;">
       <button class="folder" data-info="contact">
-        <img src="folder.PNG" alt="" draggable="false" />
+        <img src="folder.PNG" alt="" draggable="false">
         <span>contato</span>
       </button>
     </div>
   </main>
 
-  <section class="window" id="videoWindow" aria-hidden="true">
+  <section class="window" id="videoWindow">
     <div class="titlebar">
       <div class="traffic">
-        <button class="dot red" id="closeVideo" aria-label="Fechar"></button>
-        <button class="dot yellow" id="minimizeVideo" aria-label="Minimizar"></button>
-        <button class="dot green" id="fullScreenVideo" aria-label="Tela cheia"></button>
+        <button class="dot red" id="closeVideo"></button>
+        <button class="dot yellow" id="minimizeVideo"></button>
+        <button class="dot green" id="fullScreenVideo"></button>
       </div>
       <div class="window-title" id="videoTitle">vídeo</div>
     </div>
+
     <div class="window-body">
       <video id="mainVideo" controls playsinline></video>
     </div>
   </section>
 
-  <section class="info-window" id="infoWindow" aria-hidden="true">
+  <section class="info-window" id="infoWindow">
     <div class="titlebar">
       <div class="traffic">
-        <button class="dot red" id="closeInfo" aria-label="Fechar"></button>
-        <button class="dot yellow" id="minimizeInfo" aria-label="Minimizar"></button>
-        <button class="dot green" id="maximizeInfo" aria-label="Ampliar"></button>
+        <button class="dot red" id="closeInfo"></button>
+        <button class="dot yellow" id="minimizeInfo"></button>
+        <button class="dot green" id="maximizeInfo"></button>
       </div>
       <div class="window-title" id="infoTitle">pasta</div>
     </div>
+
     <div class="info-content" id="infoContent"></div>
   </section>
 
@@ -436,39 +402,22 @@
     const folderContent = {
       about: {
         title: "sobre mim",
-        text: `
-          <div>
-            Mariana Mina é artista e criadora.
-            <br><br>
-            Aqui você pode escrever um texto maior sobre ela, sua pesquisa,
-            trabalhos, referências e tudo que quiser apresentar.
-          </div>
-        `,
+        text: `Mariana Mina é artista e criadora.<br><br>
+        Aqui você pode colocar um texto maior contando sobre ela, sua pesquisa, seus trabalhos e referências.`,
         small: false
       },
-
       resume: {
         title: "currículo",
-        text: `
-          <div>
-            <strong>Mariana Mina</strong><br><br>
-            Direção criativa / audiovisual / arte.<br><br>
-            Adicione aqui formação, exposições, projetos, clientes
-            e experiências profissionais.
-          </div>
-        `,
+        text: `<strong>Mariana Mina</strong><br><br>
+        Direção criativa / audiovisual / arte.<br><br>
+        Aqui você pode adicionar sua formação, experiências, projetos e exposições.`,
         small: true
       },
-
       contact: {
         title: "contato",
-        text: `
-          <div>
-            <strong>contato</strong><br><br>
-            email@exemplo.com<br>
-            instagram.com/seuinstagram
-          </div>
-        `,
+        text: `<strong>contato</strong><br><br>
+        seuemail@exemplo.com<br>
+        instagram.com/seuinstagram`,
         small: true
       }
     };
@@ -480,11 +429,8 @@
 
       videoTitle.textContent = title;
       videoWindow.classList.add("open");
-      videoWindow.setAttribute("aria-hidden", "false");
 
-      mainVideo.play().catch(() => {
-        /* o botão play aparecerá caso o navegador bloqueie */
-      });
+      mainVideo.play().catch(() => {});
     }
 
     function closeVideo() {
@@ -492,7 +438,6 @@
       mainVideo.removeAttribute("src");
       mainVideo.load();
       videoWindow.classList.remove("open");
-      videoWindow.setAttribute("aria-hidden", "true");
     }
 
     function openInfo(type) {
@@ -501,20 +446,16 @@
       infoTitle.textContent = data.title;
       infoContent.innerHTML = data.text;
       infoContent.classList.toggle("small", data.small);
-
       infoWindow.classList.add("open");
-      infoWindow.setAttribute("aria-hidden", "false");
     }
 
     function closeInfo() {
       infoWindow.classList.remove("open");
-      infoWindow.setAttribute("aria-hidden", "true");
     }
 
     document.querySelectorAll(".file").forEach((file) => {
       file.addEventListener("click", () => {
         if (file.closest(".desktop-item").dataset.dragged === "true") return;
-
         openVideo(file.dataset.video, file.dataset.title);
       });
     });
@@ -522,12 +463,12 @@
     document.querySelectorAll(".folder").forEach((folder) => {
       folder.addEventListener("click", () => {
         if (folder.closest(".desktop-item").dataset.dragged === "true") return;
-
         openInfo(folder.dataset.info);
       });
     });
 
     document.getElementById("closeVideo").addEventListener("click", closeVideo);
+
     document.getElementById("minimizeVideo").addEventListener("click", () => {
       videoWindow.classList.remove("open");
     });
@@ -541,17 +482,14 @@
     });
 
     document.getElementById("closeInfo").addEventListener("click", closeInfo);
+
     document.getElementById("minimizeInfo").addEventListener("click", () => {
       infoWindow.classList.remove("open");
     });
 
     document.getElementById("maximizeInfo").addEventListener("click", () => {
-      infoWindow.classList.toggle("fullscreen-info");
-      if (infoWindow.classList.contains("fullscreen-info")) {
-        infoWindow.style.width = "94vw";
-      } else {
-        infoWindow.style.width = "";
-      }
+      infoWindow.style.width =
+        infoWindow.style.width === "94vw" ? "" : "94vw";
     });
 
     document.addEventListener("keydown", (event) => {
@@ -561,18 +499,56 @@
       }
     });
 
-    /* Capas sempre paradas */
-    document.querySelectorAll(".thumb video").forEach((capa) => {
-      capa.pause();
+    /* Cria uma capa parada usando um frame do próprio vídeo */
+    document.querySelectorAll("canvas[data-cover]").forEach((canvas) => {
+      const source = canvas.dataset.cover;
+      const video = document.createElement("video");
 
-      capa.addEventListener("loadeddata", () => {
-        capa.currentTime = 0;
-        capa.pause();
+      video.src = source;
+      video.muted = true;
+      video.preload = "auto";
+      video.playsInline = true;
+
+      video.addEventListener("loadedmetadata", () => {
+        video.currentTime = Math.min(0.5, video.duration / 2);
       });
 
-      capa.addEventListener("play", () => {
-        capa.pause();
-        capa.currentTime = 0;
+      video.addEventListener("seeked", () => {
+        const context = canvas.getContext("2d");
+        canvas.width = 240;
+        canvas.height = 180;
+
+        const videoRatio = video.videoWidth / video.videoHeight;
+        const canvasRatio = canvas.width / canvas.height;
+
+        let sourceWidth = video.videoWidth;
+        let sourceHeight = video.videoHeight;
+        let sourceX = 0;
+        let sourceY = 0;
+
+        if (videoRatio > canvasRatio) {
+          sourceWidth = video.videoHeight * canvasRatio;
+          sourceX = (video.videoWidth - sourceWidth) / 2;
+        } else {
+          sourceHeight = video.videoWidth / canvasRatio;
+          sourceY = (video.videoHeight - sourceHeight) / 2;
+        }
+
+        context.drawImage(
+          video,
+          sourceX,
+          sourceY,
+          sourceWidth,
+          sourceHeight,
+          0,
+          0,
+          canvas.width,
+          canvas.height
+        );
+
+        video.pause();
+        video.removeAttribute("src");
+        video.load();
       });
     });
 
@@ -627,7 +603,7 @@
 
           setTimeout(() => {
             item.dataset.dragged = "false";
-          }, 100);
+          }, 120);
         }
       }
 
